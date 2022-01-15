@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "875126256553",
+    "project_id": "retflix-f8f76",
+    "storage_bucket": "retflix-f8f76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875126256553:android:41f579573c656cf6be4ab8",
+        "android_client_info": {
+          "package_name": "com.retflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875126256553-sa3fskdnreddagfhms8j7qj666vtjivc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA16mDDVpY4Kof5bVSS-92saGJRL7BbE0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "875126256553-sa3fskdnreddagfhms8j7qj666vtjivc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "875126256553-3oq09d7t7sil4ulpsjdk84ba3bam63o1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.retflixx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
