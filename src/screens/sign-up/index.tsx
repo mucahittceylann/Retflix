@@ -1,13 +1,16 @@
-import React from 'react';
-import {View, Image, TextInput, Button, Alert} from 'react-native';
+import React, {useState, createRef} from 'react';
+import {Image, TextInput, Button, Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import {styles} from '../styles';
-const signUp = () => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
-  const secondTextInputRef = React.useRef<TextInput>(null);
-  const thirdTextInputRef = React.useRef<TextInput>(null);
+import styles from './styles';
+import icons from '../../utils/icons';
+import {DbView, DbTextInput} from '../../components';
+
+const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const secondTextInputRef = createRef<TextInput>();
+  const thirdTextInputRef = createRef<TextInput>();
 
   function handleSignUp() {
     auth()
@@ -24,50 +27,52 @@ const signUp = () => {
         }
       });
   }
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.rLogo} source={require('../images/Rlogo.jpg')} />
-      <View style={styles.inputView}>
-        <TextInput
+    <DbView style={styles.container}>
+      <Image style={styles.rLogo} source={icons.appLogo} />
+      <DbView style={styles.inputView}>
+        <DbTextInput
           value={email}
           placeholder="Email"
           keyboardType="email-address"
           returnKeyType="next"
           onChangeText={setEmail}
-          onSubmitEditing={() => secondTextInputRef?.current?.focus}
+          onSubmitEditing={() => secondTextInputRef?.current?.focus()}
         />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
+      </DbView>
+      <DbView style={styles.inputView}>
+        <DbTextInput
           ref={secondTextInputRef}
           value={password}
-          placeholder="Şifre"
+          placeholder="Password"
           returnKeyType="next"
           onChangeText={setPassword}
           secureTextEntry
-          onSubmitEditing={() => thirdTextInputRef?.current?.focus}
+          onSubmitEditing={() => thirdTextInputRef?.current?.focus()}
         />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
+      </DbView>
+      <DbView style={styles.inputView}>
+        <DbTextInput
           ref={thirdTextInputRef}
           value={confirmPassword}
-          placeholder="Şifreyi tekrar giriniz"
+          placeholder="Confirm Password"
           returnKeyType="send"
           onChangeText={setConfirmPassword}
           secureTextEntry
         />
-      </View>
-      <View style={styles.signUpButton}>
+      </DbView>
+      <DbView style={styles.signUpButton}>
+        {/*TODO: make it separate component as DbButton @mucahit */}
         <Button
-          title="Kayıt Ol"
+          title="Sign Up"
           color={'red'}
           disabled={!email || !password || !confirmPassword}
           onPress={handleSignUp}
         />
-      </View>
-    </View>
+      </DbView>
+    </DbView>
   );
 };
 
-export default signUp;
+export default SignUp;
