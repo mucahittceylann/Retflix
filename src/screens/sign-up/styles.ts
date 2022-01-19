@@ -23,12 +23,13 @@ const styles = StyleSheet.create({
     height: distances.double,
     borderRadius: distances.half,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   dbButtonText: {
     color: colors.white,
     fontSize: distances.default,
-    fontWeight: 'bold',
-    bottom: 4,
+    fontWeight: '500',
+    bottom: 2,
   },
   rLogo: {
     width: 300,
