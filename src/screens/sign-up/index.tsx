@@ -69,10 +69,12 @@ const SignUp = () => {
             onSubmitEditing={() => {}}
           />
         </DbView>
-        <DbView style={styles.dbButton}>
-          {/*TODO: make it separate component as DbButton @mucahit */}
-          <DbButton text="Sign Up" onPress={handleSignUp} />
-        </DbView>
+        <DbButton
+          title="Sign Up"
+          onPress={handleSignUp}
+          style={styles.dbButton}
+          textStyle={styles.dbButtonText}
+        />
       </DbView>
     </KeyboardAwareScrollView>
   );

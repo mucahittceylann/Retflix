@@ -1,14 +1,20 @@
 import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
-import styles from '../screens/sign-up/styles';
+import {TouchableOpacity, Text, TextStyle, ViewStyle, View} from 'react-native';
 
-const DbButton = ({text, onPress}: any) => {
+interface DbButtonProps {
+  title: string;
+  onPress: any; // Kontrol edilecek...
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+}
+
+const DbButton = ({title, onPress, style, textStyle}: DbButtonProps) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.dbButton}>
-        <Text style={styles.dbButtonText}>{text}</Text>
-      </View>
-    </TouchableOpacity>
+    <View style={style}>
+      <TouchableOpacity onPress={onPress}>
+        <Text style={textStyle}>{title}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
