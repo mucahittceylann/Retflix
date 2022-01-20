@@ -1,20 +1,18 @@
 import React from 'react';
-import {TouchableOpacity, Text, TextStyle, ViewStyle, View} from 'react-native';
+import {TouchableOpacity, Text, TextStyle, ViewStyle} from 'react-native';
 
 interface DbButtonProps {
   title: string;
-  onPress: any; // Kontrol edilecek...
+  onPress: () => void; // Kontrol edilecek...
   style?: ViewStyle;
-  textStyle?: TextStyle;
+  titleStyle?: TextStyle;
 }
 
-const DbButton = ({title, onPress, style, textStyle}: DbButtonProps) => {
+const DbButton = ({title, onPress, style, titleStyle}: DbButtonProps) => {
   return (
-    <View style={style}>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={textStyle}>{title}</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity style={style} onPress={onPress}>
+      <Text style={titleStyle}>{title}</Text>
+    </TouchableOpacity>
   );
 };
 
