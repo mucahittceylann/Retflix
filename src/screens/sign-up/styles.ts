@@ -1,5 +1,9 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../utils/colors';
+<<<<<<< HEAD
+=======
+import distances from '../../utils/distances';
+>>>>>>> 211ef7b57fc5649d731b4152b0940bffb1cb86a4
 
 const styles = StyleSheet.create({
   container: {
@@ -11,17 +15,32 @@ const styles = StyleSheet.create({
   inputView: {
     width: '85%',
     height: 40,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    marginTop: 7,
+    backgroundColor: colors.white,
+    borderRadius: distances.half,
+    marginTop: distances.half,
   },
-  signUpButton: {
+  dbButton: {
     width: '70%',
-    marginTop: 10,
+    marginTop: distances.half,
+    backgroundColor: colors.red,
+    height: distances.double,
+    borderRadius: distances.half,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dbButtonText: {
+    color: colors.white,
+    fontSize: distances.default,
+    fontWeight: '500',
+    bottom: 2,
   },
   rLogo: {
     width: 300,
     height: 200,
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: colors.black,
   },
 });
 
