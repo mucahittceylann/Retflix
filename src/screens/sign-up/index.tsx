@@ -1,11 +1,17 @@
 import React, {useState, createRef} from 'react';
-import {Image, TextInput, Alert} from 'react-native';
+import {Alert, Image, TextInput} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import auth from '@react-native-firebase/auth';
 import styles from './styles';
 import icons from '../../utils/icons';
 import {DbView, DbTextInput, DbButton} from '../../components';
 import colors from '../../utils/colors';
+import {useDispatch} from 'react-redux';
+import {
+  setUserAction,
+  signOutAction,
+  signUpAction,
+} from '../../appState/users/actions';
+import {useNavigation} from '@react-navigation/native';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -13,29 +19,37 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const secondTextInputRef = createRef<TextInput>();
   const thirdTextInputRef = createRef<TextInput>();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   function handleSignUp() {
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        // Navigation
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          Alert.alert('Bu e-posta adresi kullanımda');
-        }
-        if (error.code === 'auth/invalid-email') {
-          Alert.alert('Bu e-posta adresi geçersiz.');
-        }
-      });
+    if (password !== confirmPassword) {
+      Alert.alert("Passwords don't match");
+      return;
+    }
+    dispatch(
+      signUpAction(
+        email,
+        password,
+        user => {
+          dispatch(setUserAction(user));
+        },
+        () => {},
+      ),
+    );
+  }
+
+  function handleSignOut() {
+    dispatch(signOutAction());
   }
 
   return (
-    <KeyboardAwareScrollView style={styles.scrollView}>
+    <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
       <DbView style={styles.container}>
         <Image style={styles.rLogo} source={icons.appLogo} />
         <DbView style={styles.inputView}>
           <DbTextInput
+            style={styles.textInput}
             value={email}
             placeholder="Email"
             keyboardType="email-address"
@@ -47,6 +61,7 @@ const SignUp = () => {
         </DbView>
         <DbView style={styles.inputView}>
           <DbTextInput
+            style={styles.textInput}
             ref={secondTextInputRef}
             value={password}
             placeholder="Password"
@@ -59,6 +74,7 @@ const SignUp = () => {
         </DbView>
         <DbView style={styles.inputView}>
           <DbTextInput
+            style={styles.textInput}
             ref={thirdTextInputRef}
             value={confirmPassword}
             placeholder="Confirm Password"
@@ -72,6 +88,12 @@ const SignUp = () => {
         <DbButton
           title="Sign Up"
           onPress={handleSignUp}
+          style={styles.dbButton}
+          titleStyle={styles.signButtonTitle}
+        />
+        <DbButton
+          title="Sign Out"
+          onPress={handleSignOut}
           style={styles.dbButton}
           titleStyle={styles.signButtonTitle}
         />

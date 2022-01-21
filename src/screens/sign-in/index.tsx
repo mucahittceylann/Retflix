@@ -7,6 +7,8 @@ import colors from '../../utils/colors';
 import styles from '../sign-up/styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {setUserAction, signInAction} from '../../appState/users/actions';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -14,14 +16,14 @@ const SignIn = () => {
   const secondTextInputRef = createRef<TextInput>();
   const thirdTextInputRef = createRef<TextInput>();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   function signIn() {
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('giris yapildi');
-      })
-      .catch();
+    dispatch(
+      signInAction(email, password, user => {
+        dispatch(setUserAction(user));
+      }),
+    );
   }
   return (
     <KeyboardAwareScrollView style={styles.scrollView}>
@@ -50,13 +52,12 @@ const SignIn = () => {
             onSubmitEditing={() => thirdTextInputRef?.current?.focus()}
           />
         </DbView>
-        <DbView style={styles.dbButton}>
-          <DbButton
-            title="Sign In"
-            titleStyle={styles.signButtonTitle}
-            onPress={signIn}
-          />
-        </DbView>
+        <DbButton
+          title="Sign In"
+          style={styles.signInButton}
+          titleStyle={styles.signButtonTitle}
+          onPress={signIn}
+        />
         <DbText
           onPress={() => navigation.navigate('sign-up')}
           style={styles.iceBoldTitlle}>

@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray,
     borderRadius: distances.half,
     marginTop: distances.half,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  textInput: {
+    width: '100%',
+    flex: 1,
+    paddingLeft: distances.wider,
   },
   dbButton: {
     width: '70%',
@@ -45,6 +52,15 @@ const styles = StyleSheet.create({
     color: colors.ice,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  signInButton: {
+    backgroundColor: colors.red,
+    borderRadius: 8,
+    paddingVertical: distances.half,
+    width: '70%',
+    marginTop: distances.default,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
