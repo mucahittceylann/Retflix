@@ -1,6 +1,6 @@
 import React, {createRef, useState} from 'react';
-import {Button, Image, TextInput} from 'react-native';
-import {DbView, DbTextInput} from '../../components';
+import {Image, TextInput} from 'react-native';
+import {DbView, DbTextInput, DbButton} from '../../components';
 import auth from '@react-native-firebase/auth';
 import icons from '../../utils/icons';
 import styles from '../sign-up/styles';
@@ -43,11 +43,11 @@ const SignIn = () => {
           onSubmitEditing={() => thirdTextInputRef?.current?.focus()}
         />
       </DbView>
-      <DbView style={styles.signUpButton}>
-        <Button
-          title="Sign In"
-          color={'red'}
-          disabled={!email || !password}
+      <DbView style={styles.dbButton}>
+        {/* Kontrol edilecek */}
+        <DbButton
+          title="Sig In"
+          titleStyle={styles.dbButtonText}
           onPress={signIn}
         />
       </DbView>

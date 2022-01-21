@@ -1,9 +1,6 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../utils/colors';
-<<<<<<< HEAD
-=======
 import distances from '../../utils/distances';
->>>>>>> 211ef7b57fc5649d731b4152b0940bffb1cb86a4
 
 const styles = StyleSheet.create({
   container: {
