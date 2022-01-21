@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  dbButtonTitle: {
+  signButtonTitle: {
     color: colors.white,
     fontSize: distances.default,
     fontWeight: 'bold',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
   },
-  signUpTitle: {
+  iceBoldText: {
     marginTop: distances.default,
     color: colors.ice,
     fontSize: distances.default,
