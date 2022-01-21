@@ -31,7 +31,7 @@ const SignIn = () => {
           <DbTextInput
             value={email}
             placeholder="Email"
-            placeholderTextColor={colors.greyishBrown}
+            placeholderTextColor={colors.black}
             keyboardType="email-address"
             returnKeyType="next"
             onChangeText={setEmail}
@@ -43,7 +43,7 @@ const SignIn = () => {
             ref={secondTextInputRef}
             value={password}
             placeholder="Password"
-            placeholderTextColor={colors.greyishBrown}
+            placeholderTextColor={colors.black}
             returnKeyType="next"
             onChangeText={setPassword}
             secureTextEntry

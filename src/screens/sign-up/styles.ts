@@ -12,13 +12,13 @@ const styles = StyleSheet.create({
   inputView: {
     width: '85%',
     height: 40,
-    backgroundColor: colors.white,
+    backgroundColor: colors.gray,
     borderRadius: distances.half,
     marginTop: distances.half,
   },
   dbButton: {
     width: '70%',
-    marginTop: distances.half,
+    marginTop: distances.default,
     backgroundColor: colors.red,
     height: 32,
     borderRadius: distances.half,

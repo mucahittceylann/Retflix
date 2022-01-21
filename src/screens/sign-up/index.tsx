@@ -39,7 +39,7 @@ const SignUp = () => {
             value={email}
             placeholder="Email"
             keyboardType="email-address"
-            placeholderTextColor={colors.greyishBrown}
+            placeholderTextColor={colors.black}
             returnKeyType="next"
             onChangeText={setEmail}
             onSubmitEditing={() => secondTextInputRef?.current?.focus()}
@@ -50,7 +50,7 @@ const SignUp = () => {
             ref={secondTextInputRef}
             value={password}
             placeholder="Password"
-            placeholderTextColor={colors.greyishBrown}
+            placeholderTextColor={colors.black}
             returnKeyType="next"
             onChangeText={setPassword}
             secureTextEntry
@@ -62,7 +62,7 @@ const SignUp = () => {
             ref={thirdTextInputRef}
             value={confirmPassword}
             placeholder="Confirm Password"
-            placeholderTextColor={colors.greyishBrown}
+            placeholderTextColor={colors.black}
             returnKeyType="send"
             onChangeText={setConfirmPassword}
             secureTextEntry
