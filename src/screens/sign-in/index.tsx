@@ -6,9 +6,8 @@ import icons from '../../utils/icons';
 import colors from '../../utils/colors';
 import styles from '../sign-up/styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import signUp from '../sign-up';
 
-const SignIn = () => {
+const SignIn = ({navigation}: any) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const secondTextInputRef = createRef<TextInput>();
@@ -56,7 +55,9 @@ const SignIn = () => {
             onPress={signIn}
           />
         </DbView>
-        <DbText onPress={signUp} style={styles.signUpTitle}>
+        <DbText
+          onPress={() => navigation.navigate('sign-up')}
+          style={styles.signUpTitle}>
           Sign Up?
         </DbText>
       </DbView>
