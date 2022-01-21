@@ -1,9 +1,12 @@
 import React, {createRef, useState} from 'react';
 import {Image, TextInput} from 'react-native';
-import {DbView, DbTextInput, DbButton} from '../../components';
+import {DbView, DbTextInput, DbButton, DbText} from '../../components';
 import auth from '@react-native-firebase/auth';
 import icons from '../../utils/icons';
+import colors from '../../utils/colors';
 import styles from '../sign-up/styles';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import signUp from '../sign-up';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -20,38 +23,44 @@ const SignIn = () => {
       .catch();
   }
   return (
-    <DbView style={styles.container}>
-      <Image style={styles.rLogo} source={icons.appLogo} />
-      <DbView style={styles.inputView}>
-        <DbTextInput
-          value={email}
-          placeholder="Email"
-          keyboardType="email-address"
-          returnKeyType="next"
-          onChangeText={setEmail}
-          onSubmitEditing={() => secondTextInputRef?.current?.focus()}
-        />
+    <KeyboardAwareScrollView style={styles.scrollView}>
+      <DbView style={styles.container}>
+        <Image style={styles.rLogo} source={icons.appLogo} />
+        <DbView style={styles.inputView}>
+          <DbTextInput
+            value={email}
+            placeholder="Email"
+            placeholderTextColor={colors.greyishBrown}
+            keyboardType="email-address"
+            returnKeyType="next"
+            onChangeText={setEmail}
+            onSubmitEditing={() => secondTextInputRef?.current?.focus()}
+          />
+        </DbView>
+        <DbView style={styles.inputView}>
+          <DbTextInput
+            ref={secondTextInputRef}
+            value={password}
+            placeholder="Password"
+            placeholderTextColor={colors.greyishBrown}
+            returnKeyType="next"
+            onChangeText={setPassword}
+            secureTextEntry
+            onSubmitEditing={() => thirdTextInputRef?.current?.focus()}
+          />
+        </DbView>
+        <DbView style={styles.dbButton}>
+          <DbButton
+            title="Sign In"
+            titleStyle={styles.dbButtonTitle}
+            onPress={signIn}
+          />
+        </DbView>
+        <DbText onPress={signUp} style={styles.signUpTitle}>
+          Sign Up?
+        </DbText>
       </DbView>
-      <DbView style={styles.inputView}>
-        <DbTextInput
-          ref={secondTextInputRef}
-          value={password}
-          placeholder="Password"
-          returnKeyType="next"
-          onChangeText={setPassword}
-          secureTextEntry
-          onSubmitEditing={() => thirdTextInputRef?.current?.focus()}
-        />
-      </DbView>
-      <DbView style={styles.dbButton}>
-        {/* Kontrol edilecek */}
-        <DbButton
-          title="Sig In"
-          titleStyle={styles.dbButtonText}
-          onPress={signIn}
-        />
-      </DbView>
-    </DbView>
+    </KeyboardAwareScrollView>
   );
 };
 

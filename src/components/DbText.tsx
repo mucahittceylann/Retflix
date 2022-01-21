@@ -5,9 +5,10 @@ import colors from '../utils/colors';
 interface DbTextProps {
   children?: React.ReactNode;
   style?: TextStyle;
+  onPress?: () => void;
 }
 
-const DbText = ({children, style}: DbTextProps) => {
+const DbText = ({children, style, onPress}: DbTextProps) => {
   const defaultStyle = useMemo(() => {
     const textStyle: TextStyle = {
       color: colors.greyishBrown,
@@ -16,7 +17,9 @@ const DbText = ({children, style}: DbTextProps) => {
   }, []);
 
   return (
-    <Text style={StyleSheet.compose(defaultStyle, style)}>{children}</Text>
+    <Text onPress={onPress} style={StyleSheet.compose(defaultStyle, style)}>
+      {children}
+    </Text>
   );
 };
 
