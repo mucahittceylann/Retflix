@@ -73,7 +73,7 @@ const SignUp = () => {
           title="Sign Up"
           onPress={handleSignUp}
           style={styles.dbButton}
-          titleStyle={styles.dbButtonText}
+          titleStyle={styles.signButtonTitle}
         />
       </DbView>
     </KeyboardAwareScrollView>

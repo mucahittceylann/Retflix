@@ -6,13 +6,14 @@ import icons from '../../utils/icons';
 import colors from '../../utils/colors';
 import styles from '../sign-up/styles';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import signUp from '../sign-up';
+import {useNavigation} from '@react-navigation/native';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const secondTextInputRef = createRef<TextInput>();
   const thirdTextInputRef = createRef<TextInput>();
+  const navigation = useNavigation();
 
   function signIn() {
     auth()
@@ -52,11 +53,13 @@ const SignIn = () => {
         <DbView style={styles.dbButton}>
           <DbButton
             title="Sign In"
-            titleStyle={styles.dbButtonTitle}
+            titleStyle={styles.signButtonTitle}
             onPress={signIn}
           />
         </DbView>
-        <DbText onPress={signUp} style={styles.signUpTitle}>
+        <DbText
+          onPress={() => navigation.navigate('sign-up')}
+          style={styles.iceBoldTitlle}>
           Sign Up?
         </DbText>
       </DbView>
