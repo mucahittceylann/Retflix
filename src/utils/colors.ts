@@ -4,6 +4,7 @@ const colors = {
   white: 'white',
   red: 'red',
   ice: '#c7ecee',
+  gray: '#576574',
 };
 
 export default colors;
