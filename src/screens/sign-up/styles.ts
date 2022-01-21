@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  dbButtonText: {
+  dbButtonTitle: {
     color: colors.white,
     fontSize: distances.default,
-    fontWeight: '500',
+    fontWeight: 'bold',
     bottom: 2,
   },
   rLogo: {
@@ -39,6 +39,12 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
     backgroundColor: colors.black,
+  },
+  signUpTitle: {
+    marginTop: distances.default,
+    color: colors.ice,
+    fontSize: distances.default,
+    fontWeight: 'bold',
   },
 });
 

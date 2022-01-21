@@ -3,6 +3,7 @@ const colors = {
   black: 'black',
   white: 'white',
   red: 'red',
+  ice: '#c7ecee',
 };
 
 export default colors;

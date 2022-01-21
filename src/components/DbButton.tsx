@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, TextStyle, ViewStyle} from 'react-native';
 
 interface DbButtonProps {
   title: string;
-  onPress: () => void; // Kontrol edilecek...
+  onPress: () => void;
   style?: ViewStyle;
   titleStyle?: TextStyle;
 }
