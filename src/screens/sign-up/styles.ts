@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   dbButtonTitle: {
     color: colors.white,
     fontSize: distances.default,
-    fontWeight: '500',
+    fontWeight: 'bold',
     bottom: 2,
   },
   rLogo: {
