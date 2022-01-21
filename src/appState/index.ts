@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import {movieReducer} from './movies/reducer';
-import {movieSagas} from '../appState/movies/sagas';
+import {movieReducer} from './users/reducer';
+import {movieSagas} from './users/sagas';
 import {all} from 'redux-saga/effects';
 
 function* allSagas() {
