@@ -59,7 +59,7 @@ const SignIn = () => {
         </DbView>
         <DbText
           onPress={() => navigation.navigate('sign-up')}
-          style={styles.iceBoldText}>
+          style={styles.iceBoldTitlle}>
           Sign Up?
         </DbText>
       </DbView>

@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
     width: '70%',
     marginTop: distances.half,
     backgroundColor: colors.red,
-    height: distances.double,
+    height: 32,
     borderRadius: distances.half,
     alignItems: 'center',
     justifyContent: 'center',
   },
   signButtonTitle: {
     color: colors.white,
-    fontSize: distances.default,
+    fontSize: 16,
     fontWeight: 'bold',
     bottom: 2,
   },
@@ -40,10 +40,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
   },
-  iceBoldText: {
+  iceBoldTitlle: {
     marginTop: distances.default,
     color: colors.ice,
-    fontSize: distances.default,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
