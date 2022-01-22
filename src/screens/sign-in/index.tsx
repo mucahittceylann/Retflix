@@ -1,7 +1,6 @@
 import React, {createRef, useState} from 'react';
 import {Image, TextInput} from 'react-native';
 import {DbView, DbTextInput, DbButton, DbText} from '../../components';
-import auth from '@react-native-firebase/auth';
 import icons from '../../utils/icons';
 import colors from '../../utils/colors';
 import styles from '../sign-up/styles';
@@ -26,11 +25,12 @@ const SignIn = () => {
     );
   }
   return (
-    <KeyboardAwareScrollView style={styles.scrollView}>
+    <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
       <DbView style={styles.container}>
         <Image style={styles.rLogo} source={icons.appLogo} />
         <DbView style={styles.inputView}>
           <DbTextInput
+            style={styles.textInput}
             value={email}
             placeholder="Email"
             placeholderTextColor={colors.black}
@@ -42,6 +42,7 @@ const SignIn = () => {
         </DbView>
         <DbView style={styles.inputView}>
           <DbTextInput
+            style={styles.textInput}
             ref={secondTextInputRef}
             value={password}
             placeholder="Password"

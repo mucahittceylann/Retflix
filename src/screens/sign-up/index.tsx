@@ -6,11 +6,7 @@ import icons from '../../utils/icons';
 import {DbView, DbTextInput, DbButton} from '../../components';
 import colors from '../../utils/colors';
 import {useDispatch} from 'react-redux';
-import {
-  setUserAction,
-  signOutAction,
-  signUpAction,
-} from '../../appState/users/actions';
+import {setUserAction, signUpAction} from '../../appState/users/actions';
 import {useNavigation} from '@react-navigation/native';
 
 const SignUp = () => {
@@ -37,10 +33,6 @@ const SignUp = () => {
         () => {},
       ),
     );
-  }
-
-  function handleSignOut() {
-    dispatch(signOutAction());
   }
 
   return (
@@ -88,12 +80,6 @@ const SignUp = () => {
         <DbButton
           title="Sign Up"
           onPress={handleSignUp}
-          style={styles.dbButton}
-          titleStyle={styles.signButtonTitle}
-        />
-        <DbButton
-          title="Sign Out"
-          onPress={handleSignOut}
           style={styles.dbButton}
           titleStyle={styles.signButtonTitle}
         />
