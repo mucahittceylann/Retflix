@@ -6,12 +6,7 @@ import icons from '../../utils/icons';
 import {DbView, DbTextInput, DbButton} from '../../components';
 import colors from '../../utils/colors';
 import {useDispatch} from 'react-redux';
-import {
-  setUserAction,
-  signOutAction,
-  signUpAction,
-} from '../../appState/users/actions';
-import {useNavigation} from '@react-navigation/native';
+import {setUserAction, signUpAction} from '../../appState/users/actions';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +15,6 @@ const SignUp = () => {
   const secondTextInputRef = createRef<TextInput>();
   const thirdTextInputRef = createRef<TextInput>();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   function handleSignUp() {
     if (password !== confirmPassword) {
@@ -31,16 +25,12 @@ const SignUp = () => {
       signUpAction(
         email,
         password,
-        user => {
+        (user: any) => {
           dispatch(setUserAction(user));
         },
         () => {},
       ),
     );
-  }
-
-  function handleSignOut() {
-    dispatch(signOutAction());
   }
 
   return (
@@ -88,12 +78,6 @@ const SignUp = () => {
         <DbButton
           title="Sign Up"
           onPress={handleSignUp}
-          style={styles.dbButton}
-          titleStyle={styles.signButtonTitle}
-        />
-        <DbButton
-          title="Sign Out"
-          onPress={handleSignOut}
           style={styles.dbButton}
           titleStyle={styles.signButtonTitle}
         />
