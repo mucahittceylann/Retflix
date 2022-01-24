@@ -27,8 +27,8 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <HomeStack.Navigator screenOptions={{headerShown: false}}>
-        <HomeStack.Screen name="sign-up" component={signUp} />
         <HomeStack.Screen name="sign-in" component={SignIn} />
+        <HomeStack.Screen name="sign-up" component={signUp} />
       </HomeStack.Navigator>
 
       {isLoading ? (

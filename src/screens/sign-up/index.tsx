@@ -39,10 +39,6 @@ const SignUp = () => {
     );
   }
 
-  function handleSignOut() {
-    dispatch(signOutAction());
-  }
-
   return (
     <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
       <DbView style={styles.container}>
@@ -88,12 +84,6 @@ const SignUp = () => {
         <DbButton
           title="Sign Up"
           onPress={handleSignUp}
-          style={styles.dbButton}
-          titleStyle={styles.signButtonTitle}
-        />
-        <DbButton
-          title="Sign Out"
-          onPress={handleSignOut}
           style={styles.dbButton}
           titleStyle={styles.signButtonTitle}
         />

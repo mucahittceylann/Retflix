@@ -6,11 +6,18 @@ interface DbButtonProps {
   onPress: () => void;
   style?: ViewStyle;
   titleStyle?: TextStyle;
+  disabled?: boolean;
 }
 
-const DbButton = ({title, onPress, style, titleStyle}: DbButtonProps) => {
+const DbButton = ({
+  title,
+  onPress,
+  style,
+  titleStyle,
+  disabled,
+}: DbButtonProps) => {
   return (
-    <TouchableOpacity style={style} onPress={onPress}>
+    <TouchableOpacity disabled={disabled} style={style} onPress={onPress}>
       <Text style={titleStyle}>{title}</Text>
     </TouchableOpacity>
   );

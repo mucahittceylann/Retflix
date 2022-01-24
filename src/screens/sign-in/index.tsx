@@ -1,7 +1,6 @@
 import React, {createRef, useState} from 'react';
-import {Image, TextInput} from 'react-native';
+import {Alert, Image, TextInput} from 'react-native';
 import {DbView, DbTextInput, DbButton, DbText} from '../../components';
-import auth from '@react-native-firebase/auth';
 import icons from '../../utils/icons';
 import colors from '../../utils/colors';
 import styles from '../sign-up/styles';
@@ -20,17 +19,26 @@ const SignIn = () => {
 
   function signIn() {
     dispatch(
-      signInAction(email, password, user => {
-        dispatch(setUserAction(user));
-      }),
+      signInAction(
+        email,
+        password,
+        (user: any) => {
+          dispatch(setUserAction(user));
+          // navigation
+        },
+        () => {
+          Alert.alert('Check your email or password.');
+        },
+      ),
     );
   }
   return (
-    <KeyboardAwareScrollView style={styles.scrollView}>
+    <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
       <DbView style={styles.container}>
         <Image style={styles.rLogo} source={icons.appLogo} />
         <DbView style={styles.inputView}>
           <DbTextInput
+            style={styles.textInput}
             value={email}
             placeholder="Email"
             placeholderTextColor={colors.black}
@@ -43,6 +51,7 @@ const SignIn = () => {
         <DbView style={styles.inputView}>
           <DbTextInput
             ref={secondTextInputRef}
+            style={styles.textInput}
             value={password}
             placeholder="Password"
             placeholderTextColor={colors.black}
@@ -53,6 +62,7 @@ const SignIn = () => {
           />
         </DbView>
         <DbButton
+          disabled={!email || !password}
           title="Sign In"
           style={styles.signInButton}
           titleStyle={styles.signButtonTitle}
