@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SignIn from './src/screens/sign-in';
 import {NavigationContainer} from '@react-navigation/native';
@@ -9,7 +9,6 @@ import DbView from './src/components/DbView';
 import {height, width} from './src/utils/metrics';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {isLoadingSelector} from './src/appState/app/selectors';
-import auth from '@react-native-firebase/auth';
 
 const HomeStack = createNativeStackNavigator();
 
