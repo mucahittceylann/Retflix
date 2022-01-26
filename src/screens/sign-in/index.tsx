@@ -64,7 +64,7 @@ const SignIn = () => {
         <DbButton
           disabled={!email || !password}
           title="Sign In"
-          style={styles.signInButton}
+          style={styles.dbButton}
           titleStyle={styles.signButtonTitle}
           onPress={signIn}
         />
