@@ -7,7 +7,6 @@ import {DbView, DbTextInput, DbButton} from '../../components';
 import colors from '../../utils/colors';
 import {useDispatch} from 'react-redux';
 import {setUserAction, signUpAction} from '../../appState/users/actions';
-import {useNavigation} from '@react-navigation/native';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +15,6 @@ const SignUp = () => {
   const secondTextInputRef = createRef<TextInput>();
   const thirdTextInputRef = createRef<TextInput>();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   function handleSignUp() {
     if (password !== confirmPassword) {
@@ -27,7 +25,7 @@ const SignUp = () => {
       signUpAction(
         email,
         password,
-        user => {
+        (user: any) => {
           dispatch(setUserAction(user));
         },
         () => {},
@@ -78,6 +76,7 @@ const SignUp = () => {
           />
         </DbView>
         <DbButton
+          disabled={!email || !password || !confirmPassword}
           title="Sign Up"
           onPress={handleSignUp}
           style={styles.dbButton}

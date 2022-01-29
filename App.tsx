@@ -1,17 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SignIn from './src/screens/sign-in';
 import {NavigationContainer} from '@react-navigation/native';
-import signUp from './src/screens/sign-up';
-import {Provider, useSelector} from 'react-redux';
+import {Provider, useDispatch, useSelector} from 'react-redux';
 import {store} from './src/appState';
 import DbView from './src/components/DbView';
 import {height, width} from './src/utils/metrics';
+import {setIsSignedInAction} from './src/appState/app/actions';
 import {ActivityIndicator, StyleSheet} from 'react-native';
-import {isLoadingSelector} from './src/appState/app/selectors';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  isLoadingSelector,
+  isSignedInSelector,
+} from './src/appState/app/selectors';
+import {firebase} from '@react-native-firebase/auth';
+import signUp from './src/screens/sign-up';
+import HomePage from './src/screens/home';
+import Profile from './src/screens/profile';
+import SignIn from './src/screens/sign-in';
+import myList from './src/screens/myList';
 
-const HomeStack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const Home = createNativeStackNavigator();
 
 const App = () => {
   return (
@@ -21,15 +31,41 @@ const App = () => {
   );
 };
 
+const HomeStack = () => {
+  return (
+    <Home.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <Home.Screen name="Home" component={HomePage} />
+      <Home.Screen name="myList" component={myList} />
+      <Home.Screen name="Profile" component={Profile} />
+    </Home.Navigator>
+  );
+};
 const Navigation = () => {
   const isLoading = useSelector(isLoadingSelector);
+  const isSignedIn = useSelector(isSignedInSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (firebase.auth().currentUser) {
+      dispatch(setIsSignedInAction(true));
+    }
+  }, []);
 
   return (
     <NavigationContainer>
-      <HomeStack.Navigator screenOptions={{headerShown: false}}>
-        <HomeStack.Screen name="sign-in" component={SignIn} />
-        <HomeStack.Screen name="sign-up" component={signUp} />
-      </HomeStack.Navigator>
+      {isSignedIn ? (
+        <Tab.Navigator screenOptions={{headerShown: false}}>
+          <Tab.Screen name="Home" component={HomeStack} />
+          <Tab.Screen name="My List" component={myList} />
+          <Tab.Screen name="Profile" component={Profile} />
+        </Tab.Navigator>
+      ) : (
+        <AuthStack.Navigator screenOptions={{headerShown: false}}>
+          <AuthStack.Screen name="sign-in" component={SignIn} />
+          <AuthStack.Screen name="sign-up" component={signUp} />
+          <AuthStack.Screen name="home" component={HomePage} />
+        </AuthStack.Navigator>
+      )}
 
       {isLoading ? (
         <DbView style={styles.loadingView}>

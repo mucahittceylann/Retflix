@@ -1,5 +1,5 @@
 import React, {createRef, useState} from 'react';
-import {Image, TextInput} from 'react-native';
+import {Alert, Image, TextInput} from 'react-native';
 import {DbView, DbTextInput, DbButton, DbText} from '../../components';
 import icons from '../../utils/icons';
 import colors from '../../utils/colors';
@@ -8,6 +8,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {setUserAction, signInAction} from '../../appState/users/actions';
+import {setIsSignedInAction} from '../../appState/app/actions';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -19,9 +20,17 @@ const SignIn = () => {
 
   function signIn() {
     dispatch(
-      signInAction(email, password, user => {
-        dispatch(setUserAction(user));
-      }),
+      signInAction(
+        email,
+        password,
+        (user: any) => {
+          dispatch(setUserAction(user));
+          dispatch(setIsSignedInAction(true));
+        },
+        () => {
+          Alert.alert('Check your email or password.');
+        },
+      ),
     );
   }
   return (
@@ -54,8 +63,9 @@ const SignIn = () => {
           />
         </DbView>
         <DbButton
+          disabled={!email || !password}
           title="Sign In"
-          style={styles.signInButton}
+          style={styles.dbButton}
           titleStyle={styles.signButtonTitle}
           onPress={signIn}
         />
