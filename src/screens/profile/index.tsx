@@ -1,13 +1,14 @@
 import {DbView} from '../../components';
 import React from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import styles from './styles';
 
-const Profile = () => {
+const ProfilePage = () => {
   return (
-    <KeyboardAwareScrollView>
-      <DbView></DbView>
+    <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
+      <DbView style={styles.container}></DbView>
     </KeyboardAwareScrollView>
   );
 };
 
-export default Profile;
+export default ProfilePage;

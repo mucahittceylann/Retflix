@@ -15,13 +15,15 @@ import {
 import {firebase} from '@react-native-firebase/auth';
 import signUp from './src/screens/sign-up';
 import HomePage from './src/screens/home';
-import Profile from './src/screens/profile';
 import SignIn from './src/screens/sign-in';
-import myList from './src/screens/myList';
+import ProfilePage from './src/screens/profile';
+import MyListPage from './src/screens/myList';
 
 const AuthStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Home = createNativeStackNavigator();
+const MyList = createNativeStackNavigator();
+const Profile = createNativeStackNavigator();
 
 const App = () => {
   return (
@@ -35,11 +37,26 @@ const HomeStack = () => {
   return (
     <Home.Navigator screenOptions={{headerTitleAlign: 'center'}}>
       <Home.Screen name="Home" component={HomePage} />
-      <Home.Screen name="myList" component={myList} />
-      <Home.Screen name="Profile" component={Profile} />
     </Home.Navigator>
   );
 };
+
+const ProfileStack = () => {
+  return (
+    <Profile.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <Profile.Screen name="Profile" component={ProfilePage} />
+    </Profile.Navigator>
+  );
+};
+
+const MyListStack = () => {
+  return (
+    <MyList.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <MyList.Screen name="My List" component={MyListPage} />
+    </MyList.Navigator>
+  );
+};
+
 const Navigation = () => {
   const isLoading = useSelector(isLoadingSelector);
   const isSignedIn = useSelector(isSignedInSelector);
@@ -56,8 +73,8 @@ const Navigation = () => {
       {isSignedIn ? (
         <Tab.Navigator screenOptions={{headerShown: false}}>
           <Tab.Screen name="Home" component={HomeStack} />
-          <Tab.Screen name="My List" component={myList} />
-          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="My List" component={MyListStack} />
+          <Tab.Screen name="Profile" component={ProfileStack} />
         </Tab.Navigator>
       ) : (
         <AuthStack.Navigator screenOptions={{headerShown: false}}>
