@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider, useDispatch, useSelector} from 'react-redux';
+import {setIsSignedInAction} from './src/appState/app/actions';
 import {store} from './src/appState';
 import DbView from './src/components/DbView';
 import {height, width} from './src/utils/metrics';
-import {setIsSignedInAction} from './src/appState/app/actions';
 import {ActivityIndicator, StyleSheet} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   isLoadingSelector,
   isSignedInSelector,
@@ -18,9 +18,11 @@ import HomePage from './src/screens/home';
 import SignIn from './src/screens/sign-in';
 import ProfilePage from './src/screens/profile';
 import MyListPage from './src/screens/myList';
+import colors from './src/utils/colors';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const AuthStack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 const Home = createNativeStackNavigator();
 const MyList = createNativeStackNavigator();
 const Profile = createNativeStackNavigator();
@@ -35,7 +37,7 @@ const App = () => {
 
 const HomeStack = () => {
   return (
-    <Home.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+    <Home.Navigator screenOptions={{headerShown: false}}>
       <Home.Screen name="Home" component={HomePage} />
     </Home.Navigator>
   );
@@ -43,7 +45,7 @@ const HomeStack = () => {
 
 const ProfileStack = () => {
   return (
-    <Profile.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+    <Profile.Navigator screenOptions={{headerShown: false}}>
       <Profile.Screen name="Profile" component={ProfilePage} />
     </Profile.Navigator>
   );
@@ -51,7 +53,7 @@ const ProfileStack = () => {
 
 const MyListStack = () => {
   return (
-    <MyList.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+    <MyList.Navigator screenOptions={{headerShown: false}}>
       <MyList.Screen name="My List" component={MyListPage} />
     </MyList.Navigator>
   );
@@ -71,10 +73,39 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       {isSignedIn ? (
-        <Tab.Navigator screenOptions={{headerShown: false}}>
-          <Tab.Screen name="Home" component={HomeStack} />
-          <Tab.Screen name="My List" component={MyListStack} />
-          <Tab.Screen name="Profile" component={ProfileStack} />
+        <Tab.Navigator
+          activeColor={colors.red}
+          barStyle={{backgroundColor: colors.black}}>
+          <Tab.Screen
+            name="Home"
+            component={HomeStack}
+            options={{
+              tabBarLabel: 'Home',
+              tabBarIcon: ({color}) => (
+                <FontAwesome name="home" color={color} size={20} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="My List"
+            component={MyListStack}
+            options={{
+              tabBarLabel: 'My List',
+              tabBarIcon: ({color}) => (
+                <FontAwesome name="music" color={color} size={20} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={ProfileStack}
+            options={{
+              tabBarLabel: 'Profile',
+              tabBarIcon: ({color}) => (
+                <FontAwesome name="user" color={color} size={20} />
+              ),
+            }}
+          />
         </Tab.Navigator>
       ) : (
         <AuthStack.Navigator screenOptions={{headerShown: false}}>
