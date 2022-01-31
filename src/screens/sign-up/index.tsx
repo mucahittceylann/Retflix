@@ -76,6 +76,7 @@ const SignUp = () => {
           />
         </DbView>
         <DbButton
+          disabled={!email || !password || !confirmPassword}
           title="Sign Up"
           onPress={handleSignUp}
           style={styles.dbButton}

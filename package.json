@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator='iPhone SE'",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
@@ -12,14 +12,19 @@
   "dependencies": {
     "@react-native-firebase/app": "^14.2.2",
     "@react-native-firebase/auth": "^14.2.2",
+    "@react-navigation/material-bottom-tabs": "^6.1.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "axios": "^0.25.0",
     "react": "17.0.2",
     "react-native": "0.66.4",
+    "react-native-elements": "^3.4.2",
     "react-native-flipper": "^0.128.4",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-paper": "^4.11.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
+    "react-native-vector-icons": "^9.0.0",
     "react-redux": "^7.2.6",
     "redux-flipper": "^2.0.1",
     "redux-saga": "^1.1.3",

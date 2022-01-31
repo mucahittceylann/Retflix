@@ -8,6 +8,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {setUserAction, signInAction} from '../../appState/users/actions';
+import {setIsSignedInAction} from '../../appState/app/actions';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +25,7 @@ const SignIn = () => {
         password,
         (user: any) => {
           dispatch(setUserAction(user));
-          // navigation
+          dispatch(setIsSignedInAction(true));
         },
         () => {
           Alert.alert('Check your email or password.');
@@ -50,8 +51,8 @@ const SignIn = () => {
         </DbView>
         <DbView style={styles.inputView}>
           <DbTextInput
-            ref={secondTextInputRef}
             style={styles.textInput}
+            ref={secondTextInputRef}
             value={password}
             placeholder="Password"
             placeholderTextColor={colors.black}
@@ -64,7 +65,7 @@ const SignIn = () => {
         <DbButton
           disabled={!email || !password}
           title="Sign In"
-          style={styles.signInButton}
+          style={styles.dbButton}
           titleStyle={styles.signButtonTitle}
           onPress={signIn}
         />

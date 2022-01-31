@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     paddingLeft: distances.wider,
   },
   dbButton: {
-    width: '70%',
+    width: '85%',
     marginTop: distances.default,
     backgroundColor: colors.red,
-    height: 32,
+    height: 40,
     borderRadius: distances.half,
     alignItems: 'center',
     justifyContent: 'center',
@@ -52,15 +52,6 @@ const styles = StyleSheet.create({
     color: colors.ice,
     fontSize: 16,
     fontWeight: 'bold',
-  },
-  signInButton: {
-    backgroundColor: colors.red,
-    borderRadius: 8,
-    paddingVertical: distances.half,
-    width: '70%',
-    marginTop: distances.default,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
