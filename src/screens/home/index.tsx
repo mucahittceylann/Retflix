@@ -1,27 +1,46 @@
 import React, {useEffect} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, TouchableOpacity} from 'react-native';
+import {Image} from 'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPopularMoviesAction} from '../../appState/movies/action';
-import {moviesSelector} from '../../appState/movies/selectors';
+import {
+  getMovieDetailsAction,
+  getPopularMoviesAction,
+} from '../../appState/movies/action';
+import {popularMoviesSelector} from '../../appState/movies/selectors';
 import {DbText, DbView} from '../../components';
 import styles from './styles';
 
 const HomePage = () => {
-  const movies = useSelector(moviesSelector);
+  const popularMovies = useSelector(popularMoviesSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPopularMoviesAction());
   }, [dispatch]);
+
+  const getMovieDetails = (id: number) => {
+    dispatch(getMovieDetailsAction(id));
+  };
+
   return (
     <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
       <DbView style={styles.container}>
         <FlatList
+          horizontal
           keyExtractor={item => item.title}
-          data={movies}
+          data={popularMovies}
           renderItem={({item}) => (
-            <DbText style={{color: 'white'}}>{item.title}</DbText>
+            <TouchableOpacity
+              style={{marginHorizontal: 20}}
+              onPress={() => getMovieDetails(item.id)}>
+              <Image
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+                }}
+                style={{width: 60, height: 60}}
+              />
+            </TouchableOpacity>
           )}
         />
       </DbView>
