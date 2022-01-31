@@ -20,6 +20,7 @@ import ProfilePage from './src/screens/profile';
 import MyListPage from './src/screens/myList';
 import colors from './src/utils/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Screens from './src/shared/types/navigation';
 
 const AuthStack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -37,24 +38,27 @@ const App = () => {
 
 const HomeStack = () => {
   return (
-    <Home.Navigator screenOptions={{headerShown: false}}>
-      <Home.Screen name="Home" component={HomePage} />
+    <Home.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <Home.Screen name={Screens.HomeTab.Home} component={HomePage} />
     </Home.Navigator>
   );
 };
 
 const ProfileStack = () => {
   return (
-    <Profile.Navigator screenOptions={{headerShown: false}}>
-      <Profile.Screen name="Profile" component={ProfilePage} />
+    <Profile.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <Profile.Screen
+        name={Screens.ProfileTab.Profile}
+        component={ProfilePage}
+      />
     </Profile.Navigator>
   );
 };
 
 const MyListStack = () => {
   return (
-    <MyList.Navigator screenOptions={{headerShown: false}}>
-      <MyList.Screen name="My List" component={MyListPage} />
+    <MyList.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <MyList.Screen name={Screens.MyListTab.MyList} component={MyListPage} />
     </MyList.Navigator>
   );
 };
@@ -68,6 +72,8 @@ const Navigation = () => {
     if (firebase.auth().currentUser) {
       dispatch(setIsSignedInAction(true));
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -77,7 +83,7 @@ const Navigation = () => {
           activeColor={colors.red}
           barStyle={{backgroundColor: colors.black}}>
           <Tab.Screen
-            name="Home"
+            name={Screens.HomeTab.index}
             component={HomeStack}
             options={{
               tabBarLabel: 'Home',
@@ -87,7 +93,7 @@ const Navigation = () => {
             }}
           />
           <Tab.Screen
-            name="My List"
+            name={Screens.MyListTab.index}
             component={MyListStack}
             options={{
               tabBarLabel: 'My List',
@@ -97,7 +103,7 @@ const Navigation = () => {
             }}
           />
           <Tab.Screen
-            name="Profile"
+            name={Screens.ProfileTab.index}
             component={ProfileStack}
             options={{
               tabBarLabel: 'Profile',
