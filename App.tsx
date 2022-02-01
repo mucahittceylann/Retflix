@@ -7,7 +7,7 @@ import {setIsSignedInAction} from './src/appState/app/actions';
 import {store} from './src/appState';
 import DbView from './src/components/DbView';
 import {height, width} from './src/utils/metrics';
-import {ActivityIndicator, StyleSheet} from 'react-native';
+import {ActivityIndicator, Image, StyleSheet} from 'react-native';
 import {
   isLoadingSelector,
   isSignedInSelector,
@@ -21,6 +21,8 @@ import MyListPage from './src/screens/myList';
 import colors from './src/utils/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Screens from './src/shared/types/navigation';
+import icons from './src/utils/icons';
+import distances from './src/utils/distances';
 
 const AuthStack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -38,28 +40,49 @@ const App = () => {
 
 const HomeStack = () => {
   return (
-    <Home.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-      <Home.Screen name={Screens.HomeTab.Home} component={HomePage} />
-    </Home.Navigator>
-  );
-};
-
-const ProfileStack = () => {
-  return (
-    <Profile.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-      <Profile.Screen
-        name={Screens.ProfileTab.Profile}
-        component={ProfilePage}
+    <Home.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        statusBarStyle: 'dark',
+        headerLeft: () => {
+          return <Image style={styles.appLogo} source={icons.appLogo} />;
+        },
+      }}>
+      <Home.Screen
+        name={Screens.HomeTab.Retflix}
+        component={HomePage}
+        options={{
+          headerTintColor: colors.ice,
+          headerStyle: styles.back,
+        }}
       />
-    </Profile.Navigator>
+    </Home.Navigator>
   );
 };
 
 const MyListStack = () => {
   return (
-    <MyList.Navigator screenOptions={{headerTitleAlign: 'center'}}>
-      <MyList.Screen name={Screens.MyListTab.MyList} component={MyListPage} />
+    <MyList.Navigator
+      screenOptions={{headerTitleAlign: 'center', statusBarStyle: 'dark'}}>
+      <MyList.Screen
+        name={Screens.MyListTab.MyList}
+        component={MyListPage}
+        options={{headerTintColor: colors.ice, headerStyle: styles.back}}
+      />
     </MyList.Navigator>
+  );
+};
+
+const ProfileStack = () => {
+  return (
+    <Profile.Navigator
+      screenOptions={{headerTitleAlign: 'center', statusBarStyle: 'dark'}}>
+      <Profile.Screen
+        name={Screens.ProfileTab.Profile}
+        component={ProfilePage}
+        options={{headerTintColor: colors.ice, headerStyle: styles.back}}
+      />
+    </Profile.Navigator>
   );
 };
 
@@ -138,6 +161,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#0009',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  back: {
+    backgroundColor: colors.black,
+    width: distances.mega,
+    height: distances.mega,
+  },
+  appLogo: {
+    width: 100,
+    height: distances.mega,
+    right: distances.wider,
   },
 });
 
