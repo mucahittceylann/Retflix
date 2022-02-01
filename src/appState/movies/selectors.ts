@@ -9,3 +9,8 @@ export const activeMovieSelector = createSelector(
   state => state.movies.activeMovie,
   activeMovie => activeMovie,
 );
+
+export const nowPlayingMoviesSelector = createSelector(
+  state => state.movies.nowPlayingMovies,
+  nowPlayingMovies => nowPlayingMovies,
+);

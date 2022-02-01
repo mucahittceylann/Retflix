@@ -1,7 +1,15 @@
-import {GET_MOVIE_DETAILS, GET_POPULAR_MOVIES} from './constants';
+import {
+  GET_MOVIE_DETAILS,
+  GET_MOVIES_NOW_PLAYING,
+  GET_POPULAR_MOVIES,
+} from './constants';
 import {put, takeLeading} from '@redux-saga/core/effects';
 import api from '../../api';
-import {setActiveMovieAction, setPopularMoviesAction} from './action';
+import {
+  setActiveMovieAction,
+  setMoviesNowPlayingAction,
+  setPopularMoviesAction,
+} from './action';
 import {AnyAction} from 'redux';
 import {AxiosResponse} from 'axios';
 
@@ -23,7 +31,7 @@ function* watchGetPopularMoviesSaga() {
 }
 
 /************************* GET MOVIE DETAILS *************************/
-function* getMovieDetails(action: AnyAction) {
+function* getMovieDetailsSaga(action: AnyAction) {
   try {
     const resp: AxiosResponse = yield api.getMovieDetails(action.id);
 
@@ -36,9 +44,30 @@ function* getMovieDetails(action: AnyAction) {
   }
 }
 function* watchGetMovieDetails() {
-  yield takeLeading(GET_MOVIE_DETAILS, getMovieDetails);
+  yield takeLeading(GET_MOVIE_DETAILS, getMovieDetailsSaga);
+}
+
+/************************* GET MOVIES NOW PLAYING *************************/
+function* getMoviesNowPlayingSaga(action: AnyAction) {
+  try {
+    const resp: AxiosResponse = yield api.getMoviesNowPlaying();
+
+    yield put(setMoviesNowPlayingAction(resp.data));
+
+    action.onSuccess && action.onSuccess();
+  } catch (err) {
+    console.log(err);
+    action.onFailure && action.onFailure();
+  }
+}
+function* watchGetMoviesNowPlayingSaga() {
+  yield takeLeading(GET_MOVIES_NOW_PLAYING, getMoviesNowPlayingSaga);
 }
 
 /******************** EXPORT *********************/
 
-export const movieSagas = [watchGetPopularMoviesSaga(), watchGetMovieDetails()];
+export const movieSagas = [
+  watchGetPopularMoviesSaga(),
+  watchGetMovieDetails(),
+  watchGetMoviesNowPlayingSaga(),
+];

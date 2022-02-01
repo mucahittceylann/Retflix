@@ -3,6 +3,8 @@ import {
   GET_POPULAR_MOVIES,
   SET_ACTIVE_MOVIE,
   SET_POPULAR_MOVIES,
+  GET_MOVIES_NOW_PLAYING,
+  SET_MOVIES_NOW_PLAYING,
 } from './constants';
 
 export const getPopularMoviesAction = (
@@ -39,6 +41,24 @@ export const getMovieDetailsAction = (
 export const setActiveMovieAction = (movie: object) => {
   return {
     type: SET_ACTIVE_MOVIE,
+    movie,
+  };
+};
+
+export const getMoviesNowPlayingAction = (
+  onSuccess?: () => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_MOVIES_NOW_PLAYING,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const setMoviesNowPlayingAction = (movie: object) => {
+  return {
+    type: SET_MOVIES_NOW_PLAYING,
     movie,
   };
 };

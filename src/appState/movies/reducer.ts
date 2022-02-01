@@ -1,4 +1,9 @@
-import {initialState, SET_ACTIVE_MOVIE, SET_POPULAR_MOVIES} from './constants';
+import {
+  initialState,
+  SET_ACTIVE_MOVIE,
+  SET_MOVIES_NOW_PLAYING,
+  SET_POPULAR_MOVIES,
+} from './constants';
 import update from 'immutability-helper';
 
 export const movieReducer = (state = initialState, action: any) => {
@@ -11,6 +16,12 @@ export const movieReducer = (state = initialState, action: any) => {
         activeMovie: {$set: action.movie},
       });
     }
+    case SET_MOVIES_NOW_PLAYING: {
+      return update(state, {
+        nowPlayingMovies: {$set: action.movie},
+      });
+    }
+
     default:
       return state;
   }

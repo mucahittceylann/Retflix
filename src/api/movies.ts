@@ -8,8 +8,14 @@ export const getPopularMovies = () => {
   );
 };
 
-export const getMovieDetails = id => {
+export const getMovieDetails = (id: number) => {
   return axios.get(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`,
+  );
+};
+
+export const getMoviesNowPlaying = () => {
+  return axios.get(
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`,
   );
 };
