@@ -5,7 +5,10 @@ import {
   SET_POPULAR_MOVIES,
   GET_MOVIES_NOW_PLAYING,
   SET_MOVIES_NOW_PLAYING,
-  GET_MOVIE_LATEST,
+  GET_MOVIES_UPCOMING,
+  SET_MOVIES_UPCOMING,
+  GET_MOVIES_TOP_RATED,
+  SET_MOVIES_TOP_RATED,
 } from './constants';
 
 export const getPopularMoviesAction = (
@@ -64,13 +67,38 @@ export const setMoviesNowPlayingAction = (movies: Array<object>) => {
   };
 };
 
-export const getMovieLatest = (
+export const getMoviesUpcomingAction = (
   onSuccess?: () => void,
   onFailure?: () => void,
 ) => {
   return {
-    type: GET_MOVIE_LATEST,
+    type: GET_MOVIES_UPCOMING,
     onSuccess,
     onFailure,
+  };
+};
+
+export const setMoviesUpcomingAction = (movies: Array<object>) => {
+  return {
+    type: SET_MOVIES_UPCOMING,
+    movies,
+  };
+};
+
+export const getMoviesTopRatedAction = (
+  onSucces?: () => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_MOVIES_TOP_RATED,
+    onSucces,
+    onFailure,
+  };
+};
+
+export const setMoviesTopRatedAction = (movies: Array<object>) => {
+  return {
+    type: SET_MOVIES_TOP_RATED,
+    movies,
   };
 };

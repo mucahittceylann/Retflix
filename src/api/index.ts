@@ -2,12 +2,14 @@ import {
   getMovieDetails,
   getPopularMovies,
   getMoviesNowPlaying,
-  getMovieLatest,
+  getMoviesUpcoming,
+  getMoviesTopRated,
 } from './movies';
 
 export default {
   getPopularMovies,
   getMovieDetails,
   getMoviesNowPlaying,
-  getMovieLatest,
+  getMoviesUpcoming,
+  getMoviesTopRated,
 };

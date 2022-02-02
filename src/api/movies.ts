@@ -20,8 +20,14 @@ export const getMoviesNowPlaying = () => {
   );
 };
 
-export const getMovieLatest = () => {
+export const getMoviesUpcoming = () => {
   return axios.get(
-    `https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}`,
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`,
+  );
+};
+
+export const getMoviesTopRated = () => {
+  return axios.get(
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`,
   );
 };

@@ -14,3 +14,13 @@ export const nowPlayingMoviesSelector = createSelector(
   state => state.movies.nowPlayingMovies,
   nowPlayingMovies => nowPlayingMovies,
 );
+
+export const upcomingMoviesSelector = createSelector(
+  state => state.movies.upcomingMovies,
+  upcomingMovies => upcomingMovies,
+);
+
+export const topRatedMoviesSelector = createSelector(
+  state => state.movies.topRatedMovies,
+  topRatedMovies => topRatedMovies,
+);
