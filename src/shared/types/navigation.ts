@@ -1,7 +1,8 @@
 const Screens = {
   HomeTab: {
     index: 'HomeTab',
-    Home: 'Home',
+    Retflix: 'Retflix',
+    Details: 'Details',
   },
   ProfileTab: {
     index: 'ProfileTab',
@@ -9,7 +10,7 @@ const Screens = {
   },
   MyListTab: {
     index: 'MyListTab',
-    MyList: 'MyList',
+    MyList: 'My List',
   },
 };
 
