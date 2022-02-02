@@ -52,7 +52,7 @@ function* getMoviesNowPlayingSaga(action: AnyAction) {
   try {
     const resp: AxiosResponse = yield api.getMoviesNowPlaying();
 
-    yield put(setMoviesNowPlayingAction(resp.data));
+    yield put(setMoviesNowPlayingAction(resp.data.results));
 
     action.onSuccess && action.onSuccess();
   } catch (err) {

@@ -56,9 +56,9 @@ export const getMoviesNowPlayingAction = (
   };
 };
 
-export const setMoviesNowPlayingAction = (movie: object) => {
+export const setMoviesNowPlayingAction = (movies: object) => {
   return {
     type: SET_MOVIES_NOW_PLAYING,
-    movie,
+    movies,
   };
 };

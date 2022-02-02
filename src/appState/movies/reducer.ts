@@ -18,7 +18,7 @@ export const movieReducer = (state = initialState, action: any) => {
     }
     case SET_MOVIES_NOW_PLAYING: {
       return update(state, {
-        nowPlayingMovies: {$set: action.movie},
+        nowPlayingMovies: {$set: action.movies},
       });
     }
 

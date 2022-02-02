@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {FlatList, TouchableOpacity} from 'react-native';
 import {Image} from 'react-native-elements';
@@ -14,14 +13,12 @@ import {
   popularMoviesSelector,
 } from '../../appState/movies/selectors';
 import {DbText, DbView} from '../../components';
-import Screens from '../../shared/types/navigation';
 import styles from './styles';
 
 const HomePage = () => {
   const popularMovies = useSelector(popularMoviesSelector);
   const nowPlayingMovies = useSelector(nowPlayingMoviesSelector);
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   useEffect(() => {
     dispatch(getPopularMoviesAction());
@@ -58,7 +55,7 @@ const HomePage = () => {
           data={nowPlayingMovies}
           renderItem={({item}) => (
             <TouchableOpacity>
-              onPress={() => navigation.navigate(Screens.HomeTab.Details)}
+              onPress={() => getMovieDetails(item.id)}
               <Image
                 source={{
                   uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
