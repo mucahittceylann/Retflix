@@ -54,8 +54,7 @@ const HomePage = () => {
           keyExtractor={item => item.title}
           data={nowPlayingMovies}
           renderItem={({item}) => (
-            <TouchableOpacity>
-              onPress={() => getMovieDetails(item.id)}
+            <TouchableOpacity onPress={() => getMovieDetails(item.id)}>
               <Image
                 source={{
                   uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,

@@ -18,7 +18,7 @@ export const getPopularMoviesAction = (
   };
 };
 
-export const setPopularMoviesAction = (movies: object) => {
+export const setPopularMoviesAction = (movies: Array<object>) => {
   return {
     type: SET_POPULAR_MOVIES,
     movies,
@@ -56,7 +56,7 @@ export const getMoviesNowPlayingAction = (
   };
 };
 
-export const setMoviesNowPlayingAction = (movies: object) => {
+export const setMoviesNowPlayingAction = (movies: Array<object>) => {
   return {
     type: SET_MOVIES_NOW_PLAYING,
     movies,
