@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     height: distances.mega,
   },
   appLogo: {
-    width: 100,
+    width: 80,
     height: distances.mega,
     right: distances.wider,
   },

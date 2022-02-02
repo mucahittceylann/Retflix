@@ -17,9 +17,14 @@ const styles = StyleSheet.create({
     left: distances.default,
     margin: 5,
   },
-  imageStyle: {
+  popularStyle: {
+    width: 160,
+    height: 220,
+    marginHorizontal: 10,
+  },
+  listStyle: {
     width: 120,
-    height: 150,
+    height: 160,
     marginHorizontal: 10,
   },
 });
