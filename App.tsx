@@ -7,7 +7,7 @@ import {setIsSignedInAction} from './src/appState/app/actions';
 import {store} from './src/appState';
 import DbView from './src/components/DbView';
 import {height, width} from './src/utils/metrics';
-import {ActivityIndicator, Image, StyleSheet} from 'react-native';
+import {ActivityIndicator, Image, StatusBar, StyleSheet} from 'react-native';
 import {
   isLoadingSelector,
   isSignedInSelector,
@@ -23,6 +23,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Screens from './src/shared/types/navigation';
 import icons from './src/utils/icons';
 import distances from './src/utils/distances';
+import MovieDetails from './src/screens/detail';
 
 const AuthStack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -43,8 +44,7 @@ const HomeStack = () => {
     <Home.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
-        statusBarStyle: 'dark',
-        headerLeft: () => {
+        headerRight: () => {
           return <Image style={styles.appLogo} source={icons.appLogo} />;
         },
       }}>
@@ -56,14 +56,21 @@ const HomeStack = () => {
           headerStyle: styles.back,
         }}
       />
+      <Home.Screen
+        name={Screens.HomeTab.Details}
+        component={MovieDetails}
+        options={{
+          headerTintColor: colors.ice,
+          headerStyle: styles.back,
+        }}
+      />
     </Home.Navigator>
   );
 };
 
 const MyListStack = () => {
   return (
-    <MyList.Navigator
-      screenOptions={{headerTitleAlign: 'center', statusBarStyle: 'dark'}}>
+    <MyList.Navigator screenOptions={{headerTitleAlign: 'center'}}>
       <MyList.Screen
         name={Screens.MyListTab.MyList}
         component={MyListPage}
@@ -75,8 +82,7 @@ const MyListStack = () => {
 
 const ProfileStack = () => {
   return (
-    <Profile.Navigator
-      screenOptions={{headerTitleAlign: 'center', statusBarStyle: 'dark'}}>
+    <Profile.Navigator screenOptions={{headerTitleAlign: 'center'}}>
       <Profile.Screen
         name={Screens.ProfileTab.Profile}
         component={ProfilePage}
@@ -101,54 +107,57 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {isSignedIn ? (
-        <Tab.Navigator
-          activeColor={colors.red}
-          barStyle={{backgroundColor: colors.black}}>
-          <Tab.Screen
-            name={Screens.HomeTab.index}
-            component={HomeStack}
-            options={{
-              tabBarLabel: 'Home',
-              tabBarIcon: ({color}) => (
-                <FontAwesome name="home" color={color} size={20} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name={Screens.MyListTab.index}
-            component={MyListStack}
-            options={{
-              tabBarLabel: 'My List',
-              tabBarIcon: ({color}) => (
-                <FontAwesome name="music" color={color} size={20} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name={Screens.ProfileTab.index}
-            component={ProfileStack}
-            options={{
-              tabBarLabel: 'Profile',
-              tabBarIcon: ({color}) => (
-                <FontAwesome name="user" color={color} size={20} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      ) : (
-        <AuthStack.Navigator screenOptions={{headerShown: false}}>
-          <AuthStack.Screen name="sign-in" component={SignIn} />
-          <AuthStack.Screen name="sign-up" component={signUp} />
-          <AuthStack.Screen name="home" component={HomePage} />
-        </AuthStack.Navigator>
-      )}
+      <>
+        <StatusBar barStyle="light-content" />
+        {isSignedIn ? (
+          <Tab.Navigator
+            activeColor={colors.red}
+            barStyle={{backgroundColor: colors.black}}>
+            <Tab.Screen
+              name={Screens.HomeTab.index}
+              component={HomeStack}
+              options={{
+                tabBarLabel: 'Home',
+                tabBarIcon: ({color}) => (
+                  <FontAwesome name="home" color={color} size={20} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name={Screens.MyListTab.index}
+              component={MyListStack}
+              options={{
+                tabBarLabel: 'My List',
+                tabBarIcon: ({color}) => (
+                  <FontAwesome name="music" color={color} size={20} />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name={Screens.ProfileTab.index}
+              component={ProfileStack}
+              options={{
+                tabBarLabel: 'Profile',
+                tabBarIcon: ({color}) => (
+                  <FontAwesome name="user" color={color} size={20} />
+                ),
+              }}
+            />
+          </Tab.Navigator>
+        ) : (
+          <AuthStack.Navigator screenOptions={{headerShown: false}}>
+            <AuthStack.Screen name="sign-in" component={SignIn} />
+            <AuthStack.Screen name="sign-up" component={signUp} />
+            <AuthStack.Screen name="home" component={HomePage} />
+          </AuthStack.Navigator>
+        )}
 
-      {isLoading ? (
-        <DbView style={styles.loadingView}>
-          <ActivityIndicator size={'large'} />
-        </DbView>
-      ) : null}
+        {isLoading ? (
+          <DbView style={styles.loadingView}>
+            <ActivityIndicator size={'large'} />
+          </DbView>
+        ) : null}
+      </>
     </NavigationContainer>
   );
 };
@@ -168,9 +177,8 @@ const styles = StyleSheet.create({
     height: distances.mega,
   },
   appLogo: {
-    width: 80,
-    height: distances.mega,
-    right: distances.wider,
+    width: 30,
+    aspectRatio: 0.7,
   },
 });
 
