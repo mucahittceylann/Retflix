@@ -16,6 +16,7 @@ import {
 } from './action';
 import {AnyAction} from 'redux';
 import {AxiosResponse} from 'axios';
+import {setIsLoadingAction} from '../app/actions';
 
 /************************* GET POPULAR MOVIES *************************/
 function* getPopularMoviesSaga(action: AnyAction) {
@@ -37,6 +38,7 @@ function* watchGetPopularMoviesSaga() {
 /************************* GET MOVIE DETAILS *************************/
 function* getMovieDetailsSaga(action: AnyAction) {
   try {
+    yield put(setIsLoadingAction(true));
     const resp: AxiosResponse = yield api.getMovieDetails(action.id);
 
     yield put(setActiveMovieAction(resp.data));
@@ -45,6 +47,8 @@ function* getMovieDetailsSaga(action: AnyAction) {
   } catch (err) {
     console.log(err);
     action.onFailure && action.onFailure();
+  } finally {
+    yield put(setIsLoadingAction(false));
   }
 }
 function* watchGetMovieDetails() {
