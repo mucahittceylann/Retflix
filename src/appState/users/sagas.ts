@@ -57,7 +57,7 @@ function* watchSignUpSaga() {
 }
 
 /************************* SIGN OUT *************************/
-function* signOutSaga(action) {
+function* signOutSaga(action: any) {
   try {
     auth().signOut();
     action.onSuccess && action.onSuccess();

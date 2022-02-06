@@ -29,8 +29,9 @@ const MovieList = ({data, header, imageStyle}: Props) => {
 const styles = StyleSheet.create({
   headerTitle: {
     fontStyle: 'italic',
+    fontWeight: '600',
     fontSize: 24,
-    color: colors.gray,
+    color: colors.white,
     marginTop: distances.default,
     marginBottom: distances.half,
     marginLeft: distances.default,

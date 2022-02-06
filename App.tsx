@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useLayoutEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
@@ -97,7 +97,7 @@ const Navigation = () => {
   const isSignedIn = useSelector(isSignedInSelector);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (firebase.auth().currentUser) {
       dispatch(setIsSignedInAction(true));
     }

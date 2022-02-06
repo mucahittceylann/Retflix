@@ -24,7 +24,7 @@ export function signInAction(
   };
 }
 
-export function setUserAction(user) {
+export function setUserAction(user: any) {
   return {
     type: SET_USER,
     user,
