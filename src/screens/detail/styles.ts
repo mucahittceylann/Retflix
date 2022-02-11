@@ -14,15 +14,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
     margin: distances.wider,
   },
-  dbButton: {
-    width: '70%',
-    marginTop: distances.default,
-    backgroundColor: colors.red,
-    height: 40,
-    borderRadius: distances.half,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   overviewTitle: {
     color: colors.white,
     alignItems: 'center',
@@ -33,8 +24,8 @@ const styles = StyleSheet.create({
   iceBoldTitle: {
     marginTop: distances.default,
     color: colors.ice,
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 20,
+    fontWeight: '600',
   },
   detailImage: {
     width: 350,
@@ -45,6 +36,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     color: colors.white,
+  },
+  listStyle: {
+    width: 120,
+    height: 160,
+    marginHorizontal: distances.half,
+  },
+  similarView: {
+    marginTop: -distances.default,
+    margin: distances.default,
+    marginBottom: distances.default,
+  },
+  iconsView: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    margin: distances.wider,
+    marginTop: -distances.half,
   },
 });
 

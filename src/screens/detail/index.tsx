@@ -2,17 +2,27 @@ import React, {useEffect} from 'react';
 import {ScrollView, Text} from 'react-native';
 import {Image} from 'react-native-elements';
 import {useDispatch, useSelector} from 'react-redux';
-import {getMovieDetailsAction} from '../../appState/movies/action';
-import {activeMovieSelector} from '../../appState/movies/selectors';
-import {DbButton, DbView} from '../../components';
+import {
+  getMovieDetailsAction,
+  getMoviesSimilarAction,
+} from '../../appState/movies/action';
+import {
+  activeMovieSelector,
+  similarMoviesSelector,
+} from '../../appState/movies/selectors';
+import {DbView} from '../../components';
+import MovieList from '../../components/MovieList';
+import RateitView from './RateitView';
 import styles from './styles';
 
 const MovieDetails = () => {
   const movie = useSelector(activeMovieSelector);
+  const similarMovies = useSelector(similarMoviesSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getMovieDetailsAction(movie.id));
+    dispatch(getMoviesSimilarAction(movie.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -24,12 +34,10 @@ const MovieDetails = () => {
         />
         <Text style={styles.iceBoldTitle}>{movie.title}</Text>
         <Text style={styles.overviewTitle}>{movie.overview}</Text>
-        <DbButton
-          title="Add to My List"
-          style={styles.dbButton}
-          titleStyle={styles.whiteText}
-          onPress={() => null}
-        />
+      </DbView>
+      <RateitView />
+      <DbView style={styles.similarView}>
+        <MovieList data={similarMovies} header="Similar Movies" />
       </DbView>
     </ScrollView>
   );

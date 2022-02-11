@@ -4,12 +4,14 @@ import {
   GET_POPULAR_MOVIES,
   GET_MOVIES_UPCOMING,
   GET_MOVIES_TOP_RATED,
+  GET_MOVIES_SIMILAR,
 } from './constants';
 import {put, takeLeading} from '@redux-saga/core/effects';
 import api from '../../api';
 import {
   setActiveMovieAction,
   setMoviesNowPlayingAction,
+  setMoviesSimilarAction,
   setMoviesTopRatedAction,
   setMoviesUpcomingAction,
   setPopularMoviesAction,
@@ -106,6 +108,23 @@ function* watchGetMoviesTopRatedSaga() {
   yield takeLeading(GET_MOVIES_TOP_RATED, getMoviesTopRatedSaga);
 }
 
+/************************* GET MOVIES SIMILAR *************************/
+function* getMoviesSimilarSaga(action: AnyAction) {
+  try {
+    const resp: AxiosResponse = yield api.getMoviesSimilar(action.id);
+
+    yield put(setMoviesSimilarAction(resp.data.results));
+
+    action.onSuccess && action.onSuccess();
+  } catch (err) {
+    console.log(err);
+    action.onFailure && action.onFailure();
+  }
+}
+function* watchGetMoviesSimilarSaga() {
+  yield takeLeading(GET_MOVIES_SIMILAR, getMoviesSimilarSaga);
+}
+
 /******************** EXPORT *********************/
 
 export const movieSagas = [
@@ -114,4 +133,5 @@ export const movieSagas = [
   watchGetMoviesNowPlayingSaga(),
   watchGetMoviesUpcomingSaga(),
   watchGetMoviesTopRatedSaga(),
+  watchGetMoviesSimilarSaga(),
 ];
