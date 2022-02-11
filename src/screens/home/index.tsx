@@ -13,6 +13,7 @@ import {
   topRatedMoviesSelector,
   upcomingMoviesSelector,
 } from '../../appState/movies/selectors';
+import {DbText, DbView} from '../../components';
 import MovieList from '../../components/MovieList';
 import styles from './styles';
 
@@ -35,6 +36,9 @@ const HomePage = () => {
       showsVerticalScrollIndicator={false}
       style={styles.scrollView}
       contentContainerStyle={styles.contentContainer}>
+      <DbView style={styles.popularView}>
+        <DbText style={styles.newText}>Number One</DbText>
+      </DbView>
       <MovieList data={popularMovies} header="Popular" />
       <MovieList
         data={upcomingMoives}
