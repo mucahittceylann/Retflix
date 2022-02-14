@@ -1,11 +1,12 @@
 import {createSelector} from 'reselect';
+import {RootState} from '../index';
 
 export const isLoadingSelector = createSelector(
-  state => state.app.isLoading,
+  (state: RootState) => state.app.isLoading,
   isLoading => isLoading,
 );
 
 export const isSignedInSelector = createSelector(
-  state => state.app.isSignedIn,
+  (state: RootState) => state.app.isSignedIn,
   isSignedIn => isSignedIn,
 );

@@ -9,6 +9,8 @@ import {
   SET_MOVIES_UPCOMING,
   GET_MOVIES_TOP_RATED,
   SET_MOVIES_TOP_RATED,
+  GET_MOVIES_SIMILAR,
+  SET_MOVIES_SIMILAR,
 } from './constants';
 
 export const getPopularMoviesAction = (
@@ -99,6 +101,26 @@ export const getMoviesTopRatedAction = (
 export const setMoviesTopRatedAction = (movies: Array<object>) => {
   return {
     type: SET_MOVIES_TOP_RATED,
+    movies,
+  };
+};
+
+export const getMoviesSimilarAction = (
+  id: number,
+  onSuccess?: () => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_MOVIES_SIMILAR,
+    id,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const setMoviesSimilarAction = (movies: Array<object>) => {
+  return {
+    type: SET_MOVIES_SIMILAR,
     movies,
   };
 };

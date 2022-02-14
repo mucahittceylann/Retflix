@@ -1,11 +1,12 @@
 import {SIGN_IN, SIGN_OUT, SIGN_UP} from './constants';
 import {delay, put, takeLeading} from '@redux-saga/core/effects';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {AnyAction} from 'redux';
 import {Alert} from 'react-native';
 import {setIsLoadingAction} from '../app/actions';
 
 /************************* SIGN IN *************************/
-function* signInSaga(action: any) {
+function* signInSaga(action: AnyAction) {
   try {
     yield put(setIsLoadingAction(true));
     yield delay(1000);
@@ -28,7 +29,7 @@ function* watchSignInSaga() {
 }
 
 /************************* SIGN UP *************************/
-function* signUpSaga(action: any) {
+function* signUpSaga(action: AnyAction) {
   try {
     yield put(setIsLoadingAction(true));
     yield delay(1000);
@@ -42,7 +43,7 @@ function* signUpSaga(action: any) {
           Alert.alert('Email Already In Use');
         }
         if (error.code === 'auth/invalid-email') {
-          Alert.alert('invalid email');
+          Alert.alert('Invalid Email');
         }
         action.onFailure(error);
       });
@@ -57,7 +58,7 @@ function* watchSignUpSaga() {
 }
 
 /************************* SIGN OUT *************************/
-function* signOutSaga(action) {
+function* signOutSaga(action: AnyAction) {
   try {
     auth().signOut();
     action.onSuccess && action.onSuccess();

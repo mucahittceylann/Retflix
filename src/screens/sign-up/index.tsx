@@ -7,6 +7,7 @@ import {DbView, DbTextInput, DbButton} from '../../components';
 import colors from '../../utils/colors';
 import {useDispatch} from 'react-redux';
 import {setUserAction, signUpAction} from '../../appState/users/actions';
+import {useNavigation} from '@react-navigation/native';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const secondTextInputRef = createRef<TextInput>();
   const thirdTextInputRef = createRef<TextInput>();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   function handleSignUp() {
@@ -27,6 +29,9 @@ const SignUp = () => {
         password,
         (user: any) => {
           dispatch(setUserAction(user));
+          Alert.alert('You have successfully registered :)');
+          //@ts-ignore
+          navigation.navigate('sign-in');
         },
         () => {},
       ),

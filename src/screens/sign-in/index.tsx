@@ -70,6 +70,7 @@ const SignIn = () => {
           onPress={signIn}
         />
         <DbText
+          // @ts-ignore
           onPress={() => navigation.navigate('sign-up')}
           style={styles.iceBoldTitlle}>
           Sign Up?

@@ -1,3 +1,5 @@
+import {Movie} from '../../shared/types/movie';
+
 export const GET_POPULAR_MOVIES = '@MOVIE_GET_POPULAR_MOVIES';
 export const SET_POPULAR_MOVIES = '@MOVIE_SET_POPULAR_MOVIES';
 export const GET_MOVIE_DETAILS = '@MOVIE_GET_MOVIE_DETAILS';
@@ -8,11 +10,23 @@ export const GET_MOVIES_UPCOMING = '@MOVIE_GET_MOVIES_UPCOMING';
 export const SET_MOVIES_UPCOMING = '@MOVIE_SET_MOVIES_UPCOMING';
 export const GET_MOVIES_TOP_RATED = '@MOVIE_GET_MOVIES_TOP_RATED';
 export const SET_MOVIES_TOP_RATED = '@MOVIE_SET_MOVIES_TOP_RATED';
+export const GET_MOVIES_SIMILAR = '@MOVIE_GET_MOVIES_SIMILAR';
+export const SET_MOVIES_SIMILAR = '@MOVIE_SET_MOVIES_SIMILAR';
 
-export const initialState = {
-  activeMovie: {},
+export const initialState: MovieState = {
+  activeMovie: undefined,
   nowPlayingMovies: [],
   popularMovies: [],
   upcomingMovies: [],
   topRatedMovies: [],
+  similarMovies: [],
 };
+
+export interface MovieState {
+  activeMovie?: Movie;
+  nowPlayingMovies: Movie[];
+  popularMovies: Movie[];
+  upcomingMovies: Movie[];
+  topRatedMovies: Movie[];
+  similarMovies: Movie[];
+}
