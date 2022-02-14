@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   detailImage: {
-    width: 350,
     height: 330,
+    aspectRatio: 0.7,
     borderRadius: 6,
   },
   whiteText: {

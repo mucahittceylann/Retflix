@@ -1,5 +1,6 @@
 import {createSelector} from 'reselect';
 import {RootState} from '..';
+import {Movie} from '../../shared/types/movie';
 
 export const popularMoviesSelector = createSelector(
   (state: RootState) => state.movies.popularMovies,
@@ -7,7 +8,7 @@ export const popularMoviesSelector = createSelector(
 );
 
 export const activeMovieSelector = createSelector(
-  (state: any) => state.movies.activeMovie,
+  (state: RootState) => state.movies.activeMovie,
   activeMovie => activeMovie,
 );
 
@@ -29,4 +30,19 @@ export const topRatedMoviesSelector = createSelector(
 export const similarMoviesSelector = createSelector(
   (state: RootState) => state.movies.similarMovies,
   similarMovies => similarMovies,
+);
+
+export const mostPopularMovieSelector = createSelector(
+  (state: RootState) => state.movies.popularMovies,
+  (popularMovies: Movie[]) => {
+    let mostPopularMovie = popularMovies[0];
+
+    popularMovies.forEach((movie: Movie) => {
+      if (movie.popularity > mostPopularMovie.popularity) {
+        mostPopularMovie = movie;
+      }
+    });
+
+    return mostPopularMovie;
+  },
 );

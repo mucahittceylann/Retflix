@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     width: width,
     height: 260,
   },
+  mostPopularMovie: {height: 200},
   newText: {
     fontSize: 24,
     color: colors.white,

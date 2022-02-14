@@ -6,7 +6,7 @@ import {Alert} from 'react-native';
 import {setIsLoadingAction} from '../app/actions';
 
 /************************* SIGN IN *************************/
-function* signInSaga(action: any) {
+function* signInSaga(action: AnyAction) {
   try {
     yield put(setIsLoadingAction(true));
     yield delay(1000);
@@ -29,7 +29,7 @@ function* watchSignInSaga() {
 }
 
 /************************* SIGN UP *************************/
-function* signUpSaga(action: any) {
+function* signUpSaga(action: AnyAction) {
   try {
     yield put(setIsLoadingAction(true));
     yield delay(1000);

@@ -3,10 +3,11 @@ import colors from '../../../utils/colors';
 import distances from '../../../utils/distances';
 
 const styles = StyleSheet.create({
-  whiteText: {
+  redText: {
     fontSize: 16,
     fontWeight: '500',
     color: colors.red,
+    marginTop: distances.half,
   },
   rowView: {
     flexDirection: 'row',
