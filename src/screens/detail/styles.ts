@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
   },
+  rowSimilar: {
+    flexDirection: 'row',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -33,14 +36,10 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   whiteText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '500',
     color: colors.white,
-  },
-  listStyle: {
-    width: 120,
-    height: 160,
-    marginHorizontal: distances.half,
+    marginLeft: 10,
   },
   similarView: {
     marginTop: -distances.default,
@@ -50,8 +49,13 @@ const styles = StyleSheet.create({
   iconsView: {
     flexDirection: 'row',
     alignSelf: 'center',
-    margin: distances.wider,
-    marginTop: -distances.half,
+    margin: distances.half,
+  },
+  similarMovies: {
+    height: 150,
+    width: 125,
+    padding: distances.half,
+    marginBottom: distances.mega,
   },
 });
 
