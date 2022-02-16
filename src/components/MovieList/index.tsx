@@ -9,17 +9,26 @@ interface Props {
   data: Array<any>;
   header?: string;
   imageStyle?: ImageStyle;
+  numColumns?: number;
+  horizontal?: boolean;
 }
 
-const MovieList = ({data, header, imageStyle}: Props) => {
+const MovieList = ({
+  data,
+  header,
+  imageStyle,
+  numColumns,
+  horizontal,
+}: Props) => {
   return (
     <>
       {header && <DbText style={styles.headerTitle}>{header}</DbText>}
       <FlatList
         showsHorizontalScrollIndicator={false}
-        horizontal
         keyExtractor={item => item.title}
+        horizontal={horizontal}
         data={data}
+        numColumns={numColumns}
         renderItem={({item}) => <Movie movie={item} imageStyle={imageStyle} />}
       />
     </>
@@ -33,7 +42,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.white,
     marginTop: distances.default,
-    marginBottom: distances.half,
     marginLeft: distances.default,
   },
 });

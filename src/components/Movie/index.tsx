@@ -10,13 +10,17 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import {DbText} from '..';
+import colors from '../../utils/colors';
+import distances from '../../utils/distances';
 
 interface Props {
   movie: any;
+  header?: string;
   imageStyle?: ImageStyle;
 }
 
-const Movie = ({movie, imageStyle}: Props) => {
+const Movie = ({movie, imageStyle, header}: Props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   //const animatedScale = useRef(new Animated.Value(1));
@@ -61,6 +65,7 @@ const Movie = ({movie, imageStyle}: Props) => {
         onPress={() => getMovieDetails(movie.id)}
         onPressIn={onPressIn}
         onPressOut={onPressOut}>
+        <DbText style={styles.headerTitle}>{header}</DbText>
         <Image
           source={{
             uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
@@ -82,6 +87,13 @@ const styles = StyleSheet.create({
     height: '100%',
     marginHorizontal: 10,
     borderRadius: 6,
+  },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: '600',
+    alignSelf: 'center',
+    color: colors.white,
+    marginBottom: distances.half,
   },
 });
 
