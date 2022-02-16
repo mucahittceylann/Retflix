@@ -5,6 +5,8 @@ import {
   getMoviesUpcoming,
   getMoviesTopRated,
   getMoviesSimilar,
+  getMoviesRecommendations,
+  getMovieLatest,
 } from './movies';
 
 export default {
@@ -14,4 +16,6 @@ export default {
   getMoviesUpcoming,
   getMoviesTopRated,
   getMoviesSimilar,
+  getMoviesRecommendations,
+  getMovieLatest,
 };

@@ -11,6 +11,10 @@ import {
   SET_MOVIES_TOP_RATED,
   GET_MOVIES_SIMILAR,
   SET_MOVIES_SIMILAR,
+  GET_MOVIES_RECOMMENDATIONS,
+  SET_MOVIES_RECOMMENDATIONS,
+  GET_MOVIE_LATEST,
+  SET_MOVIE_LATEST,
 } from './constants';
 
 export const getPopularMoviesAction = (
@@ -121,6 +125,44 @@ export const getMoviesSimilarAction = (
 export const setMoviesSimilarAction = (movies: Array<object>) => {
   return {
     type: SET_MOVIES_SIMILAR,
+    movies,
+  };
+};
+
+export const getMovieLatestAction = (
+  onSuccess?: () => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_MOVIE_LATEST,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const setMovieLatestAction = (movies: Array<object>) => {
+  return {
+    type: SET_MOVIE_LATEST,
+    movies,
+  };
+};
+
+export const getMoviesRecommendationsAction = (
+  id: number,
+  onSucces?: () => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_MOVIES_RECOMMENDATIONS,
+    id,
+    onSucces,
+    onFailure,
+  };
+};
+
+export const setMoviesRecommendationsAction = (movies: Array<object>) => {
+  return {
+    type: SET_MOVIES_RECOMMENDATIONS,
     movies,
   };
 };

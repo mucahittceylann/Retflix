@@ -2,9 +2,11 @@ import {
   initialState,
   SET_ACTIVE_MOVIE,
   SET_MOVIES_NOW_PLAYING,
+  SET_MOVIES_RECOMMENDATIONS,
   SET_MOVIES_SIMILAR,
   SET_MOVIES_TOP_RATED,
   SET_MOVIES_UPCOMING,
+  SET_MOVIE_LATEST,
   SET_POPULAR_MOVIES,
 } from './constants';
 import update from 'immutability-helper';
@@ -38,6 +40,16 @@ export const movieReducer = (state = initialState, action: any) => {
     case SET_MOVIES_SIMILAR: {
       return update(state, {
         similarMovies: {$set: action.movies},
+      });
+    }
+    case SET_MOVIE_LATEST: {
+      return update(state, {
+        latestMovie: {$set: action.movies},
+      });
+    }
+    case SET_MOVIES_RECOMMENDATIONS: {
+      return update(state, {
+        recommendationsMovies: {$set: action.movies},
       });
     }
     default:

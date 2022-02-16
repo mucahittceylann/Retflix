@@ -5,12 +5,16 @@ import {
   GET_MOVIES_UPCOMING,
   GET_MOVIES_TOP_RATED,
   GET_MOVIES_SIMILAR,
+  GET_MOVIES_RECOMMENDATIONS,
+  GET_MOVIE_LATEST,
 } from './constants';
 import {put, takeLeading} from '@redux-saga/core/effects';
 import api from '../../api';
 import {
   setActiveMovieAction,
+  setMovieLatestAction,
   setMoviesNowPlayingAction,
+  setMoviesRecommendationsAction,
   setMoviesSimilarAction,
   setMoviesTopRatedAction,
   setMoviesUpcomingAction,
@@ -125,6 +129,40 @@ function* watchGetMoviesSimilarSaga() {
   yield takeLeading(GET_MOVIES_SIMILAR, getMoviesSimilarSaga);
 }
 
+/************************* GET MOVIE LATEST *************************/
+function* getMovieLatestSaga(action: AnyAction) {
+  try {
+    const resp: AxiosResponse = yield api.getMovieLatest();
+
+    yield put(setMovieLatestAction(resp.data));
+
+    action.onSuccess && action.onSuccess();
+  } catch (err) {
+    console.log(err);
+    action.onFailure && action.onFailure();
+  }
+}
+function* watchGetMovieLatestSaga() {
+  yield takeLeading(GET_MOVIE_LATEST, getMovieLatestSaga);
+}
+
+/************************* GET MOVIES RECOMMENDATIONS *************************/
+function* getMoviesRecommendationsSaga(action: AnyAction) {
+  try {
+    const resp: AxiosResponse = yield api.getMoviesRecommendations(action.id);
+
+    yield put(setMoviesRecommendationsAction(resp.data.results));
+
+    action.onSucces && action.onSuccess();
+  } catch (err) {
+    console.log(err);
+    action.onFailure && action.onFailure();
+  }
+}
+function* watchGetMoviesRecommendationsSaga() {
+  yield takeLeading(GET_MOVIES_RECOMMENDATIONS, getMoviesRecommendationsSaga);
+}
+
 /******************** EXPORT *********************/
 
 export const movieSagas = [
@@ -134,4 +172,6 @@ export const movieSagas = [
   watchGetMoviesUpcomingSaga(),
   watchGetMoviesTopRatedSaga(),
   watchGetMoviesSimilarSaga(),
+  watchGetMovieLatestSaga(),
+  watchGetMoviesRecommendationsSaga(),
 ];

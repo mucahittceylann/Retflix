@@ -12,6 +12,10 @@ export const GET_MOVIES_TOP_RATED = '@MOVIE_GET_MOVIES_TOP_RATED';
 export const SET_MOVIES_TOP_RATED = '@MOVIE_SET_MOVIES_TOP_RATED';
 export const GET_MOVIES_SIMILAR = '@MOVIE_GET_MOVIES_SIMILAR';
 export const SET_MOVIES_SIMILAR = '@MOVIE_SET_MOVIES_SIMILAR';
+export const GET_MOVIE_LATEST = '@MOVIE_GET_MOVIE_LATEST';
+export const SET_MOVIE_LATEST = '@MOVIE_SET_MOVIE_LATEST';
+export const GET_MOVIES_RECOMMENDATIONS = '@MOVIE_GET_MOVIES_RECOMMENDATIONS';
+export const SET_MOVIES_RECOMMENDATIONS = '@MOVIE_SET_MOVIES_RECOMMENDATIONS';
 
 export const initialState: MovieState = {
   activeMovie: undefined,
@@ -20,6 +24,8 @@ export const initialState: MovieState = {
   upcomingMovies: [],
   topRatedMovies: [],
   similarMovies: [],
+  latestMovie: [],
+  recommendationsMovies: [],
 };
 
 export interface MovieState {
@@ -29,4 +35,6 @@ export interface MovieState {
   upcomingMovies: Movie[];
   topRatedMovies: Movie[];
   similarMovies: Movie[];
+  latestMovie: Movie[];
+  recommendationsMovies: Movie[];
 }

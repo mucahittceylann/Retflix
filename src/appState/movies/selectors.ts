@@ -4,7 +4,7 @@ import {Movie} from '../../shared/types/movie';
 
 export const popularMoviesSelector = createSelector(
   (state: RootState) => state.movies.popularMovies,
-  popularMovies => popularMovies,
+  popularMovies => popularMovies.slice(1),
 );
 
 export const activeMovieSelector = createSelector(
@@ -29,7 +29,17 @@ export const topRatedMoviesSelector = createSelector(
 
 export const similarMoviesSelector = createSelector(
   (state: RootState) => state.movies.similarMovies,
-  similarMovies => similarMovies,
+  similarMovies => similarMovies.splice(0, 6),
+);
+
+export const recommendationsMoviesSelector = createSelector(
+  (state: RootState) => state.movies.recommendationsMovies,
+  recommendationsMovies => recommendationsMovies.splice(0, 6),
+);
+
+export const latestMovieSelector = createSelector(
+  (state: RootState) => state.movies.latestMovie,
+  latestMovie => latestMovie,
 );
 
 export const mostPopularMovieSelector = createSelector(
