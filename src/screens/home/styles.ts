@@ -8,26 +8,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
   },
-  contentContainer: {paddingBottom: distances.default},
+  contentContainer: {paddingBottom: distances.half},
   listStyle: {
-    width: 120,
-    height: 160,
-    marginHorizontal: distances.half,
+    width: 125,
+    height: 220,
+    padding: distances.half,
   },
-  popularView: {
+  mostPopularView: {
+    flexDirection: 'row',
     width: width,
     height: 260,
   },
-  mostPopularMovie: {height: 200},
-  newText: {
-    fontSize: 24,
-    color: colors.white,
-    fontStyle: 'italic',
-    marginLeft: distances.default,
-    margin: distances.half,
-  },
-  latestImage: {
-    width: width,
+  mostPopularImage: {width: 190, aspectRatio: 0.7},
+  homeView: {
+    marginTop: 90,
   },
 });
 
