@@ -43,9 +43,3 @@ export const getMoviesRecommendations = (id: number) => {
     `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`,
   );
 };
-
-export const getMovieLatest = () => {
-  return axios.get(
-    `https://api.themoviedb.org/3/movie/latest?api_key=${API_KEY}`,
-  );
-};

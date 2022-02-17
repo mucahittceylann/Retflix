@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.black,
-    margin: distances.wider,
   },
   overviewTitle: {
     color: colors.white,
@@ -42,9 +41,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   similarView: {
-    marginTop: -distances.default,
-    margin: distances.default,
-    marginBottom: distances.default,
+    marginVertical: distances.default,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   iconsView: {
     flexDirection: 'row',
@@ -53,9 +53,17 @@ const styles = StyleSheet.create({
   },
   similarMovies: {
     height: 150,
-    width: 125,
+    width: '33%',
     padding: distances.half,
     marginBottom: distances.mega,
+  },
+  activeCategory: {
+    color: colors.red,
+    fontWeight: '500',
+  },
+  inactiveCategory: {
+    color: colors.white,
+    fontWeight: '500',
   },
 });
 

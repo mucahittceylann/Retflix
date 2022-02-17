@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, ImageStyle} from 'react-native';
+import {FlatList, ImageStyle, StyleSheet} from 'react-native';
 import React from 'react';
 import DbText from '../DbText';
 import distances from '../../utils/distances';
@@ -13,22 +13,15 @@ interface Props {
   horizontal?: boolean;
 }
 
-const MovieList = ({
-  data,
-  header,
-  imageStyle,
-  numColumns,
-  horizontal,
-}: Props) => {
+const MovieList = ({data, header, imageStyle}: Props) => {
   return (
     <>
       {header && <DbText style={styles.headerTitle}>{header}</DbText>}
       <FlatList
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => item.title}
-        horizontal={horizontal}
+        horizontal
         data={data}
-        numColumns={numColumns}
         renderItem={({item}) => <Movie movie={item} imageStyle={imageStyle} />}
       />
     </>

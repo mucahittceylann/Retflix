@@ -1,4 +1,9 @@
-import {StyleSheet, ImageStyle, Pressable} from 'react-native';
+import {
+  ActivityIndicator,
+  ImageStyle,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 import React from 'react';
 import {Image} from 'react-native-elements';
 import {getMovieDetailsAction} from '../../appState/movies/action';
@@ -10,7 +15,6 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {DbText} from '..';
 import colors from '../../utils/colors';
 import distances from '../../utils/distances';
 
@@ -20,7 +24,7 @@ interface Props {
   imageStyle?: ImageStyle;
 }
 
-const Movie = ({movie, imageStyle, header}: Props) => {
+const Movie = ({movie, imageStyle}: Props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   //const animatedScale = useRef(new Animated.Value(1));
@@ -65,8 +69,8 @@ const Movie = ({movie, imageStyle, header}: Props) => {
         onPress={() => getMovieDetails(movie.id)}
         onPressIn={onPressIn}
         onPressOut={onPressOut}>
-        <DbText style={styles.headerTitle}>{header}</DbText>
         <Image
+          PlaceholderContent={<ActivityIndicator color={colors.white} />}
           source={{
             uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
           }}
@@ -85,7 +89,6 @@ const styles = StyleSheet.create({
   defaultImageStyle: {
     width: '100%',
     height: '100%',
-    marginHorizontal: 10,
     borderRadius: 6,
   },
   headerTitle: {

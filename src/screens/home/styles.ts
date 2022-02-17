@@ -10,18 +10,28 @@ const styles = StyleSheet.create({
   },
   contentContainer: {paddingBottom: distances.half},
   listStyle: {
-    width: 125,
+    width: 140,
     height: 220,
     padding: distances.half,
   },
+  popularMovieImage: {
+    padding: distances.half,
+  },
   mostPopularView: {
-    flexDirection: 'row',
     width: width,
     height: 260,
+    marginLeft: distances.default,
+  },
+  mostPopularText: {
+    fontWeight: '600',
+    fontStyle: 'italic',
+    color: colors.white,
+    fontSize: 22,
+    marginBottom: distances.default,
   },
   mostPopularImage: {width: 190, aspectRatio: 0.7},
   homeView: {
-    marginTop: 90,
+    marginTop: distances.default,
   },
 });
 

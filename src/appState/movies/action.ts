@@ -1,20 +1,18 @@
 import {
   GET_MOVIE_DETAILS,
+  GET_MOVIES_NOW_PLAYING,
+  GET_MOVIES_RECOMMENDATIONS,
+  GET_MOVIES_SIMILAR,
+  GET_MOVIES_TOP_RATED,
+  GET_MOVIES_UPCOMING,
   GET_POPULAR_MOVIES,
   SET_ACTIVE_MOVIE,
-  SET_POPULAR_MOVIES,
-  GET_MOVIES_NOW_PLAYING,
   SET_MOVIES_NOW_PLAYING,
-  GET_MOVIES_UPCOMING,
-  SET_MOVIES_UPCOMING,
-  GET_MOVIES_TOP_RATED,
-  SET_MOVIES_TOP_RATED,
-  GET_MOVIES_SIMILAR,
-  SET_MOVIES_SIMILAR,
-  GET_MOVIES_RECOMMENDATIONS,
   SET_MOVIES_RECOMMENDATIONS,
-  GET_MOVIE_LATEST,
-  SET_MOVIE_LATEST,
+  SET_MOVIES_SIMILAR,
+  SET_MOVIES_TOP_RATED,
+  SET_MOVIES_UPCOMING,
+  SET_POPULAR_MOVIES,
 } from './constants';
 
 export const getPopularMoviesAction = (
@@ -125,24 +123,6 @@ export const getMoviesSimilarAction = (
 export const setMoviesSimilarAction = (movies: Array<object>) => {
   return {
     type: SET_MOVIES_SIMILAR,
-    movies,
-  };
-};
-
-export const getMovieLatestAction = (
-  onSuccess?: () => void,
-  onFailure?: () => void,
-) => {
-  return {
-    type: GET_MOVIE_LATEST,
-    onSuccess,
-    onFailure,
-  };
-};
-
-export const setMovieLatestAction = (movies: Array<object>) => {
-  return {
-    type: SET_MOVIE_LATEST,
     movies,
   };
 };
