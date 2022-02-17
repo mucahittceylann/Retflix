@@ -22,9 +22,10 @@ interface Props {
   movie: any;
   header?: string;
   imageStyle?: ImageStyle;
+  pressed?: () => void;
 }
 
-const Movie = ({movie, imageStyle}: Props) => {
+const Movie = ({movie, imageStyle, pressed}: Props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   //const animatedScale = useRef(new Animated.Value(1));
@@ -63,10 +64,15 @@ const Movie = ({movie, imageStyle}: Props) => {
     animatedScale.value = withTiming(1);
   };
 
+  const onPress = () => {
+    getMovieDetails(movie.id);
+    pressed && pressed();
+  };
+
   return (
     <Animated.View style={[styles.view, imageStyle, animatedStyle]}>
       <Pressable
-        onPress={() => getMovieDetails(movie.id)}
+        onPress={onPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}>
         <Image
