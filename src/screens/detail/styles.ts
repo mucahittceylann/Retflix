@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: '500',
+    padding: distances.wider,
     marginTop: distances.default,
   },
   iceBoldTitle: {
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   detailImage: {
+    marginTop: distances.half,
     height: 330,
     aspectRatio: 0.7,
     borderRadius: 6,
@@ -59,11 +61,13 @@ const styles = StyleSheet.create({
   },
   activeCategory: {
     color: colors.red,
-    fontWeight: '500',
+    fontSize: 16,
+    fontWeight: '600',
   },
   inactiveCategory: {
     color: colors.white,
-    fontWeight: '500',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 

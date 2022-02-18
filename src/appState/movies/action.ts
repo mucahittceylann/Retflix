@@ -13,6 +13,8 @@ import {
   SET_MOVIES_TOP_RATED,
   SET_MOVIES_UPCOMING,
   SET_POPULAR_MOVIES,
+  SAVE_TO_FAVORITES,
+  DELETE_FROM_FAVORITES,
 } from './constants';
 
 export const getPopularMoviesAction = (
@@ -144,5 +146,23 @@ export const setMoviesRecommendationsAction = (movies: Array<object>) => {
   return {
     type: SET_MOVIES_RECOMMENDATIONS,
     movies,
+  };
+};
+
+export const saveToFavoritesAction = (
+  onSuccess: () => void,
+  onFailure: () => void,
+) => {
+  return {
+    type: SAVE_TO_FAVORITES,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const deleteFromFavoritesAction = (index: number) => {
+  return {
+    type: DELETE_FROM_FAVORITES,
+    index,
   };
 };

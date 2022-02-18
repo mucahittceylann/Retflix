@@ -19,12 +19,14 @@ const styles = StyleSheet.create({
   },
   mostPopularView: {
     width: width,
+    alignItems: 'center',
     height: 260,
     marginLeft: distances.default,
   },
   mostPopularText: {
     fontWeight: '600',
     fontStyle: 'italic',
+    alignSelf: 'center',
     color: colors.white,
     fontSize: 22,
     marginBottom: distances.default,

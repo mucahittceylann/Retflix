@@ -37,9 +37,9 @@ export const recommendationsMoviesSelector = createSelector(
   recommendationsMovies => recommendationsMovies.splice(0, 6),
 );
 
-export const latestMovieSelector = createSelector(
-  (state: RootState) => state.movies.latestMovie,
-  latestMovie => latestMovie,
+export const favoritesSelector = createSelector(
+  (state: RootState) => state.movies.favorites,
+  favorites => favorites,
 );
 
 export const mostPopularMovieSelector = createSelector(

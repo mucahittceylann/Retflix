@@ -1,10 +1,15 @@
 import React, {useEffect} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {DbView} from '../../components';
+import {DbText, DbView} from '../../components';
 import styles from './styles';
 import firestore from '@react-native-firebase/firestore';
+import {useSelector} from 'react-redux';
+import {activeMovieSelector} from '../../appState/movies/selectors';
+import Movie from '../../components/Movie';
 
 const MyListPage = () => {
+  const movie = useSelector(activeMovieSelector);
+
   useEffect(() => {
     firestore()
       .collection('movieList')
@@ -16,7 +21,10 @@ const MyListPage = () => {
 
   return (
     <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
-      <DbView style={styles.container} />
+      <DbView style={styles.container}>
+        <DbText style={styles.whiteBoldText}>Favorites</DbText>
+        <Movie movie={movie} />
+      </DbView>
     </KeyboardAwareScrollView>
   );
 };

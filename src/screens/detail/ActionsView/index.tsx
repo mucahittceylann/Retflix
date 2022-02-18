@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {DbText, DbView} from '../../../components';
 import styles from './styles';
-import {useSelector} from 'react-redux';
-import {activeMovieSelector} from '../../../appState/movies/selectors';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  activeMovieSelector,
+  favoritesSelector,
+} from '../../../appState/movies/selectors';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
@@ -13,6 +16,8 @@ const ActionsView = () => {
   const [addedList, setAddedList] = useState(false);
   const [liked, setLiked] = useState(false);
   const activeMovie = useSelector(activeMovieSelector);
+  const favoriteMovies = useSelector(favoritesSelector);
+  const dispatch = useDispatch();
 
   const handleAddlist = () => {
     firestore()

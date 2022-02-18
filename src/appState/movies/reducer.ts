@@ -1,15 +1,17 @@
 import {
+  DELETE_FROM_FAVORITES,
   initialState,
+  SAVE_TO_FAVORITES,
   SET_ACTIVE_MOVIE,
   SET_MOVIES_NOW_PLAYING,
   SET_MOVIES_RECOMMENDATIONS,
   SET_MOVIES_SIMILAR,
   SET_MOVIES_TOP_RATED,
   SET_MOVIES_UPCOMING,
-  SET_MOVIE_LATEST,
   SET_POPULAR_MOVIES,
 } from './constants';
 import update from 'immutability-helper';
+import {Movie} from '../../shared/types/movie';
 
 export const movieReducer = (state = initialState, action: any) => {
   switch (action.type) {
@@ -42,16 +44,30 @@ export const movieReducer = (state = initialState, action: any) => {
         similarMovies: {$set: action.movies},
       });
     }
-    case SET_MOVIE_LATEST: {
-      return update(state, {
-        latestMovie: {$set: action.movie},
-      });
-    }
     case SET_MOVIES_RECOMMENDATIONS: {
       return update(state, {
         recommendationsMovies: {$set: action.movies},
       });
     }
+    case SAVE_TO_FAVORITES:
+      const recorded = state.favorites.find(
+        (favorites: Movie) => favorites.id === action.favorites.id,
+      );
+
+      if (recorded) {
+        action.onFailure();
+        return state;
+      }
+
+      action.onSuccess();
+      return update(state, {
+        favorites: {$push: [action.favorites]},
+      });
+
+    case DELETE_FROM_FAVORITES:
+      return update(state, {
+        favorites: {$splice: [[action.index, 1]]},
+      });
     default:
       return state;
   }

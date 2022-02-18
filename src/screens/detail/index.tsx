@@ -17,6 +17,7 @@ import ActionsView from './ActionsView';
 import styles from './styles';
 import {Movie} from '../../shared/types/movie';
 import TripleMovieList from '../../components/TripleMovieList';
+import colors from '../../utils/colors';
 
 const MovieDetails = () => {
   const movie: Movie = useSelector(activeMovieSelector)!;
@@ -50,6 +51,7 @@ const MovieDetails = () => {
           titleStyle={
             currentIndex === 0 ? styles.activeCategory : styles.inactiveCategory
           }
+          stickColor={currentIndex === 0 ? colors.red : undefined}
         />
         <DbButton
           title="Recommendation Movies"
@@ -57,6 +59,7 @@ const MovieDetails = () => {
           titleStyle={
             currentIndex === 1 ? styles.activeCategory : styles.inactiveCategory
           }
+          stickColor={currentIndex === 1 ? colors.red : undefined}
         />
       </DbView>
 
