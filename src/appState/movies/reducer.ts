@@ -1,7 +1,11 @@
 import {
+  DELETE_FROM_FAVORITES,
   initialState,
+  SAVE_TO_FAVORITES,
   SET_ACTIVE_MOVIE,
+  SET_FAVORITES,
   SET_MOVIES_NOW_PLAYING,
+  SET_MOVIES_RECOMMENDATIONS,
   SET_MOVIES_SIMILAR,
   SET_MOVIES_TOP_RATED,
   SET_MOVIES_UPCOMING,
@@ -40,6 +44,28 @@ export const movieReducer = (state = initialState, action: any) => {
         similarMovies: {$set: action.movies},
       });
     }
+    case SAVE_TO_FAVORITES: {
+      return update(state, {
+        favorites: {$push: [action.movie]},
+      });
+    }
+    case SET_MOVIES_RECOMMENDATIONS: {
+      return update(state, {
+        recommendationsMovies: {$set: action.movies},
+      });
+    }
+    case SET_FAVORITES:
+      return update(state, {
+        favorites: {$set: action.movies},
+      });
+
+    case DELETE_FROM_FAVORITES:
+      const foundIndex = state.favorites.findIndex(
+        movie => movie.id === action.movie.id,
+      );
+      return update(state, {
+        favorites: {$splice: [[foundIndex, 1]]},
+      });
     default:
       return state;
   }

@@ -7,18 +7,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.black,
   },
+  rowSimilar: {
+    flexDirection: 'row',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.black,
-    margin: distances.wider,
   },
   overviewTitle: {
     color: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: '500',
+    padding: distances.wider,
     marginTop: distances.default,
   },
   iceBoldTitle: {
@@ -28,30 +31,43 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   detailImage: {
+    marginTop: distances.half,
     height: 330,
     aspectRatio: 0.7,
     borderRadius: 6,
   },
   whiteText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '500',
     color: colors.white,
-  },
-  listStyle: {
-    width: 120,
-    height: 160,
-    marginHorizontal: distances.half,
+    marginLeft: 10,
   },
   similarView: {
-    marginTop: -distances.default,
-    margin: distances.default,
-    marginBottom: distances.default,
+    marginVertical: distances.default,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   iconsView: {
     flexDirection: 'row',
     alignSelf: 'center',
-    margin: distances.wider,
-    marginTop: -distances.half,
+    margin: distances.half,
+  },
+  similarMovies: {
+    height: 150,
+    width: '33%',
+    padding: distances.half,
+    marginBottom: distances.mega,
+  },
+  activeCategory: {
+    color: colors.red,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  inactiveCategory: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 

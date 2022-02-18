@@ -37,3 +37,9 @@ export const getMoviesSimilar = (id: number) => {
     `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}`,
   );
 };
+
+export const getMoviesRecommendations = (id: number) => {
+  return axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${API_KEY}`,
+  );
+};

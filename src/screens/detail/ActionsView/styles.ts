@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
     margin: distances.wider,
-    marginTop: -distances.half,
+    marginTop: distances.half,
   },
   iconView: {
     alignItems: 'center',

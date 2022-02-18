@@ -1,4 +1,9 @@
-import {StyleSheet, ImageStyle, Pressable} from 'react-native';
+import {
+  ActivityIndicator,
+  ImageStyle,
+  Pressable,
+  StyleSheet,
+} from 'react-native';
 import React from 'react';
 import {Image} from 'react-native-elements';
 import {getMovieDetailsAction} from '../../appState/movies/action';
@@ -10,13 +15,17 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import colors from '../../utils/colors';
+import distances from '../../utils/distances';
 
 interface Props {
   movie: any;
+  header?: string;
   imageStyle?: ImageStyle;
+  pressed?: () => void;
 }
 
-const Movie = ({movie, imageStyle}: Props) => {
+const Movie = ({movie, imageStyle, pressed}: Props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   //const animatedScale = useRef(new Animated.Value(1));
@@ -55,13 +64,19 @@ const Movie = ({movie, imageStyle}: Props) => {
     animatedScale.value = withTiming(1);
   };
 
+  const onPress = () => {
+    getMovieDetails(movie.id);
+    pressed && pressed();
+  };
+
   return (
     <Animated.View style={[styles.view, imageStyle, animatedStyle]}>
       <Pressable
-        onPress={() => getMovieDetails(movie.id)}
+        onPress={onPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}>
         <Image
+          PlaceholderContent={<ActivityIndicator color={colors.white} />}
           source={{
             uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
           }}
@@ -80,8 +95,14 @@ const styles = StyleSheet.create({
   defaultImageStyle: {
     width: '100%',
     height: '100%',
-    marginHorizontal: 10,
     borderRadius: 6,
+  },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: '600',
+    alignSelf: 'center',
+    color: colors.white,
+    marginBottom: distances.half,
   },
 });
 

@@ -1,17 +1,24 @@
 import {
+  DELETE_FROM_FAVORITES,
+  GET_FAVORITES,
   GET_MOVIE_DETAILS,
-  GET_POPULAR_MOVIES,
-  SET_ACTIVE_MOVIE,
-  SET_POPULAR_MOVIES,
   GET_MOVIES_NOW_PLAYING,
-  SET_MOVIES_NOW_PLAYING,
-  GET_MOVIES_UPCOMING,
-  SET_MOVIES_UPCOMING,
-  GET_MOVIES_TOP_RATED,
-  SET_MOVIES_TOP_RATED,
+  GET_MOVIES_RECOMMENDATIONS,
   GET_MOVIES_SIMILAR,
+  GET_MOVIES_TOP_RATED,
+  GET_MOVIES_UPCOMING,
+  GET_POPULAR_MOVIES,
+  SAVE_TO_FAVORITES,
+  SET_ACTIVE_MOVIE,
+  SET_FAVORITES,
+  SET_MOVIES_NOW_PLAYING,
+  SET_MOVIES_RECOMMENDATIONS,
   SET_MOVIES_SIMILAR,
+  SET_MOVIES_TOP_RATED,
+  SET_MOVIES_UPCOMING,
+  SET_POPULAR_MOVIES,
 } from './constants';
+import {Movie} from '../../shared/types/movie';
 
 export const getPopularMoviesAction = (
   onSuccess?: () => void,
@@ -122,5 +129,63 @@ export const setMoviesSimilarAction = (movies: Array<object>) => {
   return {
     type: SET_MOVIES_SIMILAR,
     movies,
+  };
+};
+
+export const getMoviesRecommendationsAction = (
+  id: number,
+  onSucces?: () => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_MOVIES_RECOMMENDATIONS,
+    id,
+    onSucces,
+    onFailure,
+  };
+};
+
+export const setMoviesRecommendationsAction = (movies: Array<object>) => {
+  return {
+    type: SET_MOVIES_RECOMMENDATIONS,
+    movies,
+  };
+};
+
+export const getFavoritesAction = (
+  onSuccess?: (movies: any) => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_FAVORITES,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const setFavoritesAction = (
+  movies: Movie[],
+  onSuccess?: any,
+  onFailure?: () => void,
+) => {
+  return {
+    type: SET_FAVORITES,
+    movies,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const saveToFavoritesAction = (movie: Movie) => {
+  return {
+    type: SAVE_TO_FAVORITES,
+    movie,
+  };
+};
+
+export const deleteFromFavoritesAction = (movie: Movie) => {
+  return {
+    type: DELETE_FROM_FAVORITES,
+    movie,
   };
 };

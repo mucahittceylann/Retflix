@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
-import {ScrollView} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+  getFavoritesAction,
   getMoviesNowPlayingAction,
   getMoviesTopRatedAction,
   getMoviesUpcomingAction,
   getPopularMoviesAction,
+  setFavoritesAction,
 } from '../../appState/movies/action';
 import {
   mostPopularMovieSelector,
@@ -32,6 +34,16 @@ const HomePage = () => {
     dispatch(getMoviesNowPlayingAction());
     dispatch(getMoviesUpcomingAction());
     dispatch(getMoviesTopRatedAction());
+    dispatch(
+      getFavoritesAction(
+        (movies: any) => {
+          dispatch(setFavoritesAction(movies));
+        },
+        () => {
+          Alert.alert('Failed to get favorites');
+        },
+      ),
+    );
   }, [dispatch]);
 
   return (
@@ -40,31 +52,37 @@ const HomePage = () => {
       style={styles.scrollView}
       contentContainerStyle={styles.contentContainer}>
       {mostPopularMovie && (
-        <DbView style={styles.popularView}>
-          <DbText style={styles.newText}>Number One</DbText>
+        <DbView style={styles.mostPopularView}>
+          <DbText style={styles.mostPopularText}>Most Popular</DbText>
           <Movie
             movie={mostPopularMovie}
-            imageStyle={styles.mostPopularMovie}
+            imageStyle={styles.mostPopularImage}
           />
         </DbView>
       )}
 
-      <MovieList data={popularMovies} header="Popular" />
-      <MovieList
-        data={upcomingMoives}
-        header="Upcoming"
-        imageStyle={styles.listStyle}
-      />
-      <MovieList
-        data={topRatedMovies}
-        header="Top Rated"
-        imageStyle={styles.listStyle}
-      />
-      <MovieList
-        data={nowPlayingMovies}
-        header="Now Playing"
-        imageStyle={styles.listStyle}
-      />
+      <DbView style={styles.homeView}>
+        <MovieList
+          data={popularMovies}
+          header="Popular"
+          imageStyle={styles.popularMovieImage}
+        />
+        <MovieList
+          data={upcomingMoives}
+          header="Upcoming"
+          imageStyle={styles.listStyle}
+        />
+        <MovieList
+          data={topRatedMovies}
+          header="Top Rated"
+          imageStyle={styles.listStyle}
+        />
+        <MovieList
+          data={nowPlayingMovies}
+          header="Now Playing"
+          imageStyle={styles.listStyle}
+        />
+      </DbView>
     </ScrollView>
   );
 };
