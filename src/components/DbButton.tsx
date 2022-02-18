@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity, Text, TextStyle, ViewStyle} from 'react-native';
 import Animated from 'react-native-reanimated';
 import {width} from '../utils/metrics';
+import distances from '../utils/distances';
 
 interface DbButtonProps {
   title: string;
@@ -26,6 +27,7 @@ const DbButton = ({
       <Animated.View
         style={{
           height: 2,
+          marginTop: distances.half,
           backgroundColor: stickColor,
           maxWidth: width * title.length,
         }}
