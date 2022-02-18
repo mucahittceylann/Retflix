@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     color: colors.white,
     margin: distances.half,
   },
+  image: {
+    padding: distances.half,
+  },
 });
 
 export default styles;
