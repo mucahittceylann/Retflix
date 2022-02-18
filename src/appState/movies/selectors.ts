@@ -56,3 +56,16 @@ export const mostPopularMovieSelector = createSelector(
     return mostPopularMovie;
   },
 );
+
+export const existInFavoritesSelector = createSelector(
+  (state: RootState) => state.movies.favorites,
+  (state: RootState) => state.movies.activeMovie,
+  (favorites, activeMovie) => {
+    if (!activeMovie) {
+      return false;
+    }
+    return Boolean(
+      favorites.find(favoriteMovie => favoriteMovie.id === activeMovie.id),
+    );
+  },
+);

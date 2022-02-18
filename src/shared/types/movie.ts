@@ -8,6 +8,7 @@ export interface Movie {
   original_language;
   original_title;
   overview;
+  ownerEmail?: string;
   popularity;
   poster_path;
   release_date;

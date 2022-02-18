@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
-import {ScrollView} from 'react-native';
+import {Alert, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
+  getFavoritesAction,
   getMoviesNowPlayingAction,
   getMoviesTopRatedAction,
   getMoviesUpcomingAction,
   getPopularMoviesAction,
+  setFavoritesAction,
 } from '../../appState/movies/action';
 import {
   mostPopularMovieSelector,
@@ -32,6 +34,16 @@ const HomePage = () => {
     dispatch(getMoviesNowPlayingAction());
     dispatch(getMoviesUpcomingAction());
     dispatch(getMoviesTopRatedAction());
+    dispatch(
+      getFavoritesAction(
+        (movies: any) => {
+          dispatch(setFavoritesAction(movies));
+        },
+        () => {
+          Alert.alert('Failed to get favorites');
+        },
+      ),
+    );
   }, [dispatch]);
 
   return (

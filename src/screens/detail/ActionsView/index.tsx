@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -7,27 +7,51 @@ import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   activeMovieSelector,
-  favoritesSelector,
+  existInFavoritesSelector,
 } from '../../../appState/movies/selectors';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import {Movie} from '../../../shared/types/movie';
+import {
+  deleteFromFavoritesAction,
+  saveToFavoritesAction,
+} from '../../../appState/movies/action';
 
 const ActionsView = () => {
-  const [addedList, setAddedList] = useState(false);
   const [liked, setLiked] = useState(false);
-  const activeMovie = useSelector(activeMovieSelector);
-  const favoriteMovies = useSelector(favoritesSelector);
+  const activeMovie: Movie = useSelector(activeMovieSelector)!;
+  const existInFavorites: boolean = useSelector(existInFavoritesSelector);
   const dispatch = useDispatch();
 
-  const handleAddlist = () => {
-    firestore()
+  const handleAddlist = async () => {
+    if (existInFavorites) {
+      await firestore()
+        .collection('movieList')
+        .where('id', '==', activeMovie.id)
+        .get()
+        .then(res => {
+          const doc = res.docs[0].id;
+          firestore()
+            .collection('movieList')
+            .doc(doc)
+            .delete()
+            .then(() => {
+              dispatch(deleteFromFavoritesAction(activeMovie));
+            });
+        });
+      return;
+    }
+
+    const savedMovie: Movie = {
+      ...activeMovie,
+      ownerEmail: auth().currentUser!.email!,
+    };
+
+    await firestore()
       .collection('movieList')
-      .add({
-        ...activeMovie,
-        ownerEmail: auth().currentUser!.email,
-      })
+      .add(savedMovie)
       .then(() => {
-        setAddedList(!addedList);
+        dispatch(saveToFavoritesAction(savedMovie));
       });
   };
 
@@ -40,7 +64,7 @@ const ActionsView = () => {
       <DbView style={styles.iconView}>
         <TouchableOpacity onPress={handleAddlist}>
           <Octicons
-            name={addedList ? 'check' : 'plus'}
+            name={existInFavorites ? 'check' : 'plus'}
             color="white"
             size={24}
           />

@@ -1,4 +1,6 @@
 import {
+  DELETE_FROM_FAVORITES,
+  GET_FAVORITES,
   GET_MOVIE_DETAILS,
   GET_MOVIES_NOW_PLAYING,
   GET_MOVIES_RECOMMENDATIONS,
@@ -6,16 +8,17 @@ import {
   GET_MOVIES_TOP_RATED,
   GET_MOVIES_UPCOMING,
   GET_POPULAR_MOVIES,
+  SAVE_TO_FAVORITES,
   SET_ACTIVE_MOVIE,
+  SET_FAVORITES,
   SET_MOVIES_NOW_PLAYING,
   SET_MOVIES_RECOMMENDATIONS,
   SET_MOVIES_SIMILAR,
   SET_MOVIES_TOP_RATED,
   SET_MOVIES_UPCOMING,
   SET_POPULAR_MOVIES,
-  SAVE_TO_FAVORITES,
-  DELETE_FROM_FAVORITES,
 } from './constants';
+import {Movie} from '../../shared/types/movie';
 
 export const getPopularMoviesAction = (
   onSuccess?: () => void,
@@ -149,20 +152,40 @@ export const setMoviesRecommendationsAction = (movies: Array<object>) => {
   };
 };
 
-export const saveToFavoritesAction = (
-  onSuccess: () => void,
-  onFailure: () => void,
+export const getFavoritesAction = (
+  onSuccess?: (movies: any) => void,
+  onFailure?: () => void,
 ) => {
   return {
-    type: SAVE_TO_FAVORITES,
+    type: GET_FAVORITES,
     onSuccess,
     onFailure,
   };
 };
 
-export const deleteFromFavoritesAction = (index: number) => {
+export const setFavoritesAction = (
+  movies: Movie[],
+  onSuccess?: any,
+  onFailure?: () => void,
+) => {
+  return {
+    type: SET_FAVORITES,
+    movies,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const saveToFavoritesAction = (movie: Movie) => {
+  return {
+    type: SAVE_TO_FAVORITES,
+    movie,
+  };
+};
+
+export const deleteFromFavoritesAction = (movie: Movie) => {
   return {
     type: DELETE_FROM_FAVORITES,
-    index,
+    movie,
   };
 };

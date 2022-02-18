@@ -1,29 +1,19 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {DbText, DbView} from '../../components';
 import styles from './styles';
-import firestore from '@react-native-firebase/firestore';
 import {useSelector} from 'react-redux';
-import {activeMovieSelector} from '../../appState/movies/selectors';
-import Movie from '../../components/Movie';
+import {favoritesSelector} from '../../appState/movies/selectors';
+import MovieList from '../../components/MovieList';
 
 const MyListPage = () => {
-  const movie = useSelector(activeMovieSelector);
-
-  useEffect(() => {
-    firestore()
-      .collection('movieList')
-      .get()
-      .then(res => {
-        console.log(res.docs);
-      });
-  }, []);
+  const favorites = useSelector(favoritesSelector);
 
   return (
     <KeyboardAwareScrollView enableOnAndroid style={styles.scrollView}>
       <DbView style={styles.container}>
         <DbText style={styles.whiteBoldText}>Favorites</DbText>
-        <Movie movie={movie} />
+        <MovieList data={favorites} imageStyle={styles.image} />
       </DbView>
     </KeyboardAwareScrollView>
   );
