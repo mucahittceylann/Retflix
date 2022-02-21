@@ -15,9 +15,14 @@ export const SET_MOVIES_SIMILAR = '@MOVIE_SET_MOVIES_SIMILAR';
 export const GET_MOVIES_RECOMMENDATIONS = '@MOVIE_GET_MOVIES_RECOMMENDATIONS';
 export const SET_MOVIES_RECOMMENDATIONS = '@MOVIE_SET_MOVIES_RECOMMENDATIONS';
 export const SAVE_TO_FAVORITES = '@MOVIE_SAVE_TO_FAVORITES';
+export const SAVE_TO_LIKED = '@MOVIE_SAVE_TO_LIKED';
+export const SAVE_TO_LIKED_MOVIES = '@MOVIE_SAVE_TO_LIKED_MOVIES';
 export const DELETE_FROM_FAVORITES = '@MOVIE_DELETE_FROM_FAVORITES';
+export const DELETE_FROM_LIKED = '@MOVIE_DELETE_FROM_LIKED';
 export const GET_FAVORITES = '@MOVIE_GET_FAVORITES';
 export const SET_FAVORITES = '@MOVIE_SET_FAVORITES';
+export const GET_LIKED = '@MOVIE_GET_LIKED';
+export const SET_LIKED = '@MOVIE_SET_LIKED';
 
 export const initialState: MovieState = {
   activeMovie: undefined,
@@ -28,6 +33,7 @@ export const initialState: MovieState = {
   similarMovies: [],
   recommendationsMovies: [],
   favorites: [],
+  likedMovies: [],
 };
 
 export interface MovieState {
@@ -39,4 +45,5 @@ export interface MovieState {
   similarMovies: Movie[];
   recommendationsMovies: Movie[];
   favorites: Movie[];
+  likedMovies: Movie[];
 }

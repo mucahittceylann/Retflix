@@ -17,6 +17,11 @@ import {
   SET_MOVIES_TOP_RATED,
   SET_MOVIES_UPCOMING,
   SET_POPULAR_MOVIES,
+  GET_LIKED,
+  SET_LIKED,
+  DELETE_FROM_LIKED,
+  SAVE_TO_LIKED,
+  SAVE_TO_LIKED_MOVIES,
 } from './constants';
 import {Movie} from '../../shared/types/movie';
 
@@ -153,7 +158,7 @@ export const setMoviesRecommendationsAction = (movies: Array<object>) => {
 };
 
 export const getFavoritesAction = (
-  onSuccess?: (movies: any) => void,
+  onSuccess?: (movies: Movie) => void,
   onFailure?: () => void,
 ) => {
   return {
@@ -165,13 +170,37 @@ export const getFavoritesAction = (
 
 export const setFavoritesAction = (
   movies: Movie[],
-  onSuccess?: any,
+  onSuccess?: () => void,
   onFailure?: () => void,
 ) => {
   return {
     type: SET_FAVORITES,
     movies,
     onSuccess,
+    onFailure,
+  };
+};
+
+export const getLikedAction = (
+  onSuccess?: (movies: Movie) => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: GET_LIKED,
+    onSuccess,
+    onFailure,
+  };
+};
+
+export const setLikedAction = (
+  movies: Movie[],
+  onSucces?: () => void,
+  onFailure?: () => void,
+) => {
+  return {
+    type: SET_LIKED,
+    movies,
+    onSucces,
     onFailure,
   };
 };
@@ -183,9 +212,30 @@ export const saveToFavoritesAction = (movie: Movie) => {
   };
 };
 
+export const setLikedMoviesAction = (movie: Movie) => {
+  return {
+    type: SAVE_TO_LIKED,
+    movie,
+  };
+};
+
+export const saveToLikedAction = (movie: Movie) => {
+  return {
+    type: SAVE_TO_LIKED_MOVIES,
+    movie,
+  };
+};
+
 export const deleteFromFavoritesAction = (movie: Movie) => {
   return {
     type: DELETE_FROM_FAVORITES,
+    movie,
+  };
+};
+
+export const deleteFromLikedAction = (movie: Movie) => {
+  return {
+    type: DELETE_FROM_LIKED,
     movie,
   };
 };
