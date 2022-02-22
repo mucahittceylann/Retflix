@@ -12,8 +12,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
   },
   whiteBoldText: {
-    fontSize: 22,
-    color: colors.white,
+    fontSize: 26,
+    alignSelf: 'center',
+    fontWeight: '600',
+    color: colors.red,
     margin: distances.half,
   },
   image: {

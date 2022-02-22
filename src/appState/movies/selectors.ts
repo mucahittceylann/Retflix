@@ -42,6 +42,11 @@ export const favoritesSelector = createSelector(
   favorites => favorites,
 );
 
+export const likedSelector = createSelector(
+  (state: RootState) => state.movies.likedMovies,
+  likedMovies => likedMovies,
+);
+
 export const mostPopularMovieSelector = createSelector(
   (state: RootState) => state.movies.popularMovies,
   (popularMovies: Movie[]) => {
@@ -66,6 +71,19 @@ export const existInFavoritesSelector = createSelector(
     }
     return Boolean(
       favorites.find(favoriteMovie => favoriteMovie.id === activeMovie.id),
+    );
+  },
+);
+
+export const existInLikedSelector = createSelector(
+  (state: RootState) => state.movies.likedMovies,
+  (state: RootState) => state.movies.activeMovie,
+  (likedMovies, activeMovie) => {
+    if (!activeMovie) {
+      return false;
+    }
+    return Boolean(
+      likedMovies.find(likedMovie => likedMovie.id === activeMovie?.id),
     );
   },
 );

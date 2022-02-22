@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {ScrollView, Text} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {ScrollView} from 'react-native';
 import {Image} from 'react-native-elements';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -12,7 +12,7 @@ import {
   recommendationsMoviesSelector,
   similarMoviesSelector,
 } from '../../appState/movies/selectors';
-import {DbButton, DbView} from '../../components';
+import {DbButton, DbText, DbView} from '../../components';
 import ActionsView from './ActionsView';
 import styles from './styles';
 import {Movie} from '../../shared/types/movie';
@@ -25,6 +25,11 @@ const MovieDetails = () => {
   const recommendationsMovies = useSelector(recommendationsMoviesSelector);
   const dispatch = useDispatch();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollViewRef = useRef<ScrollView>();
+
+  const onPressTop = () => {
+    scrollViewRef.current?.scrollTo({y: 0, animated: true});
+  };
 
   useEffect(() => {
     dispatch(getMovieDetailsAction(movie.id));
@@ -34,14 +39,15 @@ const MovieDetails = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.scrollView}>
+    //@ts-ignore
+    <ScrollView style={styles.scrollView} ref={scrollViewRef}>
       <DbView style={styles.container}>
         <Image
           source={{uri: `https://image.tmdb.org/t/p/w300${movie.poster_path}`}}
           style={styles.detailImage}
         />
-        <Text style={styles.iceBoldTitle}>{movie.title}</Text>
-        <Text style={styles.overviewTitle}>{movie.overview}</Text>
+        <DbText style={styles.iceBoldTitle}>{movie.title}</DbText>
+        <DbText style={styles.overviewTitle}>{movie.overview}</DbText>
       </DbView>
       <ActionsView />
       <DbView style={styles.similarView}>
@@ -64,9 +70,9 @@ const MovieDetails = () => {
       </DbView>
 
       {currentIndex === 0 ? (
-        <TripleMovieList data={similarMovies} />
+        <TripleMovieList data={similarMovies} onPress={onPressTop} />
       ) : (
-        <TripleMovieList data={recommendationsMovies} />
+        <TripleMovieList data={recommendationsMovies} onPress={onPressTop} />
       )}
     </ScrollView>
   );

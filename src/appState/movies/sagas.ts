@@ -7,6 +7,7 @@ import {
   GET_MOVIES_TOP_RATED,
   GET_MOVIES_UPCOMING,
   GET_POPULAR_MOVIES,
+  GET_LIKED,
 } from './constants';
 import {put, takeLeading} from '@redux-saga/core/effects';
 import api from '../../api';
@@ -22,7 +23,7 @@ import {
 import {AnyAction} from 'redux';
 import {AxiosResponse} from 'axios';
 import {setIsLoadingAction} from '../app/actions';
-import firestore from '@react-native-firebase/firestore';
+import firestore, {firebase} from '@react-native-firebase/firestore';
 import {Movie} from '../../shared/types/movie';
 
 /************************* GET POPULAR MOVIES *************************/
@@ -43,12 +44,13 @@ function* watchGetPopularMoviesSaga() {
 }
 
 /************************* GET FAVORITE MOVIES *************************/
-function* getFavoriteMovies(action: AnyAction) {
+function* getFavoriteMoviesSaga(action: AnyAction) {
   try {
     const movies: Movie[] = [];
     const getFavorites = async () => {
       await firestore()
         .collection('movieList')
+        .where('ownerEmail', '==', firebase.auth().currentUser!.email)
         .get()
         .then(res => {
           res.docs.forEach(item => {
@@ -67,7 +69,35 @@ function* getFavoriteMovies(action: AnyAction) {
   }
 }
 function* watchGetFavoriteMovies() {
-  yield takeLeading(GET_FAVORITES, getFavoriteMovies);
+  yield takeLeading(GET_FAVORITES, getFavoriteMoviesSaga);
+}
+
+/************************* GET LIKED MOVIES *************************/
+function* getLikedMoviesSaga(action: AnyAction) {
+  try {
+    const movies: Movie[] = [];
+    const getLiked = async () => {
+      await firestore()
+        .collection('movieLiked')
+        .get()
+        .then(res => {
+          res.docs.forEach(item => {
+            //@ts-ignore
+            movies.push(item.data());
+          });
+        });
+    };
+
+    getLiked().then(() => {
+      action.onSuccess && action.onSuccess(movies);
+    });
+  } catch (err) {
+    console.log(err);
+    action.onFailure && action.onFailure();
+  }
+}
+function* watchGetLikedMovies() {
+  yield takeLeading(GET_LIKED, getLikedMoviesSaga);
 }
 
 /************************* GET MOVIE DETAILS *************************/
@@ -186,4 +216,5 @@ export const movieSagas = [
   watchGetMoviesSimilarSaga(),
   watchGetMoviesRecommendationsSaga(),
   watchGetFavoriteMovies(),
+  watchGetLikedMovies(),
 ];

@@ -52,7 +52,7 @@ const HomeStack = () => {
         name={Screens.HomeTab.Retflix}
         component={HomePage}
         options={{
-          headerTintColor: colors.ice,
+          headerTintColor: colors.red,
           headerStyle: styles.back,
         }}
       />
@@ -60,7 +60,7 @@ const HomeStack = () => {
         name={Screens.HomeTab.Details}
         component={MovieDetails}
         options={{
-          headerTintColor: colors.ice,
+          headerTintColor: colors.red,
           headerStyle: styles.back,
         }}
       />
@@ -74,7 +74,7 @@ const MyListStack = () => {
       <MyList.Screen
         name={Screens.MyListTab.MyList}
         component={MyListPage}
-        options={{headerTintColor: colors.ice, headerStyle: styles.back}}
+        options={{headerTintColor: colors.red, headerStyle: styles.back}}
       />
     </MyList.Navigator>
   );
@@ -86,7 +86,7 @@ const ProfileStack = () => {
       <Profile.Screen
         name={Screens.ProfileTab.Profile}
         component={ProfilePage}
-        options={{headerTintColor: colors.ice, headerStyle: styles.back}}
+        options={{headerTintColor: colors.red, headerStyle: styles.back}}
       />
     </Profile.Navigator>
   );

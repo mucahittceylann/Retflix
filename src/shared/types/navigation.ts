@@ -2,7 +2,7 @@ const Screens = {
   HomeTab: {
     index: 'HomeTab',
     Retflix: 'Retflix',
-    Details: 'Details',
+    Details: 'Movie',
   },
   ProfileTab: {
     index: 'ProfileTab',
