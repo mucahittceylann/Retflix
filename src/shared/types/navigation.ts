@@ -7,6 +7,7 @@ const Screens = {
   ProfileTab: {
     index: 'ProfileTab',
     Profile: 'Profile',
+    LikeMovies: 'Like Movies',
   },
   MyListTab: {
     index: 'MyListTab',
